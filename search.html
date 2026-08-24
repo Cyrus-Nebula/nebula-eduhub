@@ -3,12 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>资料检索 - Nebula EduHub</title>
+    <title>资料下载 - Nebula EduHub</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .material-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+        }
+        .material-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+        }
+        .material-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .material-info { flex: 1; min-width: 0; }
+        .material-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 3px;
+            line-height: 1.4;
+        }
+        .material-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .material-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .material-btn {
+            padding: 6px 12px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-preview {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .btn-preview:hover { background: var(--primary); color: white; }
+        .btn-download {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-download:hover { background: var(--accent-dark); }
+        .category-section {
+            margin-bottom: 36px;
+        }
+        .category-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .category-title .count {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+        .empty-note {
+            background: var(--accent-light);
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+        }
+        .empty-note h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-dark);
+            margin-bottom: 8px;
+        }
+        .empty-note p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        @media (max-width: 640px) {
+            .material-grid { grid-template-columns: 1fr; }
+            .material-card { flex-wrap: wrap; }
+            .material-actions { width: 100%; }
+            .material-actions .material-btn { flex: 1; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- 导航栏 -->
 <nav class="navbar">
     <div class="container nav-inner">
         <a href="index.html" class="logo">
@@ -17,7 +126,7 @@
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">首页</a></li>
-            <li><a href="search.html" class="active">资料检索</a></li>
+            <li><a href="search.html" class="active">资料下载</a></li>
             <li><a href="tools.html">下载工具</a></li>
             <li><a href="packages.html">网校通服务</a></li>
             <li><a href="about.html">关于本站</a></li>
@@ -27,221 +136,35 @@
     </div>
 </nav>
 
-<!-- 页面标题 -->
 <section class="page-hero">
     <div class="container">
-        <div class="badge">📂 资料检索</div>
-        <h1>学习资料<span>索引库</span></h1>
-        <p>按年级、学科、类型筛选，快速找到你需要的资料。持续更新中。</p>
+        <div class="badge">📂 资料下载</div>
+        <h1>学习资料<span>免费下载</span></h1>
+        <p>电子课本、全品作业本、试卷真题、专题训练，全部支持在线预览和直接下载。</p>
     </div>
 </section>
 
-<!-- 搜索框 -->
 <div class="container">
     <div class="search-hero">
         <div class="search-input-wrap">
-            <input type="text" id="searchInput" placeholder="输入关键词，比如「九年级数学」「古诗文」…" oninput="doSearch()">
-            <button class="btn btn-primary" onclick="doSearch()">搜索</button>
+            <input type="text" id="materialSearch" placeholder="搜索资料名称，比如「二次函数」「全品」「八下」…" oninput="filterMaterials()">
         </div>
     </div>
 </div>
 
-<!-- 筛选 + 列表 -->
 <section class="section" style="padding-top:10px;">
     <div class="container">
-        <!-- 筛选栏 -->
-        <div class="filter-bar">
-            <div class="field">
-                <label>年级</label>
-                <select id="filterGrade" onchange="applyFilter()">
-                    <option value="">全部年级</option>
-                    <option value="七年级">七年级</option>
-                    <option value="八年级">八年级</option>
-                    <option value="九年级">九年级</option>
-                    <option value="中考">中考</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>学科</label>
-                <select id="filterSubject" onchange="applyFilter()">
-                    <option value="">全部学科</option>
-                    <option value="语文">语文</option>
-                    <option value="数学">数学</option>
-                    <option value="英语">英语</option>
-                    <option value="物理">物理</option>
-                    <option value="化学">化学</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>类型</label>
-                <select id="filterType" onchange="applyFilter()">
-                    <option value="">全部类型</option>
-                    <option value="试卷">试卷</option>
-                    <option value="课件">课件</option>
-                    <option value="教案">教案</option>
-                    <option value="讲义">讲义</option>
-                    <option value="电子课本">电子课本</option>
-                </select>
-            </div>
-            <button class="btn btn-outline btn-sm" onclick="resetFilter()">重置</button>
+
+        <div class="empty-note">
+            <h4>📌 大文件需联系微信获取</h4>
+            <p>部分大文件（数学课本、全品作业本合订本等）超过25MB，无法直接放在网站上。需要的同学加微信 <strong>17795600558</strong> 联系获取。</p>
         </div>
 
-        <!-- 资料列表 -->
-        <div class="resource-list" id="resourceList">
+        <div id="materialsContainer"></div>
 
-            <div class="resource-row" data-grade="九年级" data-subject="数学" data-type="试卷" data-name="九年级数学上册 单元测试卷">
-                <div class="icon" style="background:#dbeafe;">📐</div>
-                <div class="body">
-                    <h4>九年级数学上册 单元测试卷</h4>
-                    <div class="tags">
-                        <span class="tag">九年级</span>
-                        <span class="tag">数学</span>
-                        <span class="tag">试卷</span>
-                    </div>
-                    <div class="note">单元复习练习，涵盖一元二次方程、旋转、圆等核心章节，含详细答案解析。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="初中" data-subject="语文" data-type="讲义" data-name="初中语文古诗文汇总讲义">
-                <div class="icon" style="background:#dcfce7;">📖</div>
-                <div class="body">
-                    <h4>初中语文古诗文汇总讲义</h4>
-                    <div class="tags">
-                        <span class="tag">初中</span>
-                        <span class="tag">语文</span>
-                        <span class="tag">讲义</span>
-                    </div>
-                    <div class="note">七至九年级必背古诗文全集，含注释、翻译与常考题型归纳。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="八年级" data-subject="物理" data-type="课件" data-name="物理八年级全套课件">
-                <div class="icon" style="background:#fef3c7;">⚗️</div>
-                <div class="body">
-                    <h4>物理八年级全套课件</h4>
-                    <div class="tags">
-                        <span class="tag">八年级</span>
-                        <span class="tag">物理</span>
-                        <span class="tag">课件</span>
-                    </div>
-                    <div class="note">人教版八年级物理上下册 PPT 课件，配套实验演示与课堂练习。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="中考" data-subject="化学" data-type="教案" data-name="中考化学专题复习教案">
-                <div class="icon" style="background:#fce7f3;">🧪</div>
-                <div class="body">
-                    <h4>中考化学专题复习教案</h4>
-                    <div class="tags">
-                        <span class="tag">中考</span>
-                        <span class="tag">化学</span>
-                        <span class="tag">教案</span>
-                    </div>
-                    <div class="note">按中考考点划分专题，含知识梳理、例题精讲与变式训练。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="九年级" data-subject="数学" data-type="试卷" data-name="九年级数学 二次函数专题卷">
-                <div class="icon" style="background:#dbeafe;">📝</div>
-                <div class="body">
-                    <h4>九年级数学 二次函数专题卷</h4>
-                    <div class="tags">
-                        <span class="tag">九年级</span>
-                        <span class="tag">数学</span>
-                        <span class="tag">试卷</span>
-                    </div>
-                    <div class="note">二次函数压轴题分类训练，求目标点横纵比大小等经典题型，附详细解析。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="八年级" data-subject="物理" data-type="课件" data-name="八年级物理 压强课件PPT">
-                <div class="icon" style="background:#fef3c7;">⚗️</div>
-                <div class="body">
-                    <h4>八年级物理 压强课件PPT</h4>
-                    <div class="tags">
-                        <span class="tag">八年级</span>
-                        <span class="tag">物理</span>
-                        <span class="tag">课件</span>
-                    </div>
-                    <div class="note">课堂教学使用，含固体压强、液体压强、大气压强全套课件。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="中考" data-subject="语文" data-type="讲义" data-name="中考语文文言文复习讲义">
-                <div class="icon" style="background:#dcfce7;">📖</div>
-                <div class="body">
-                    <h4>中考语文文言文复习讲义</h4>
-                    <div class="tags">
-                        <span class="tag">中考</span>
-                        <span class="tag">语文</span>
-                        <span class="tag">讲义</span>
-                    </div>
-                    <div class="note">中考必考文言文知识点汇总，含实词虚词、句式翻译、真题演练。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="九年级" data-subject="英语" data-type="电子课本" data-name="人教版九年级英语下册（彩色版）">
-                <div class="icon" style="background:#e0e7ff;">📘</div>
-                <div class="body">
-                    <h4>人教版九年级英语下册（彩色版）</h4>
-                    <div class="tags">
-                        <span class="tag">九年级</span>
-                        <span class="tag">英语</span>
-                        <span class="tag">电子课本</span>
-                    </div>
-                    <div class="note">高清彩色版电子课本，可打印可在线阅读，配套课文音频。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-            <div class="resource-row" data-grade="八年级" data-subject="英语" data-type="电子课本" data-name="人教版英语八年级下册">
-                <div class="icon" style="background:#e0e7ff;">📗</div>
-                <div class="body">
-                    <h4>人教版英语八年级下册</h4>
-                    <div class="tags">
-                        <span class="tag">八年级</span>
-                        <span class="tag">英语</span>
-                        <span class="tag">电子课本</span>
-                    </div>
-                    <div class="note">完整PDF，包含全部单元课文、单词表、语法讲解，适合预习复习。</div>
-                </div>
-                <div class="action">
-                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="list-tip">
-            💡 可以不断复制上面的 item 块，添加自己收集的资料索引。资料持续更新中，加微信获取最新资源。
-        </div>
     </div>
 </section>
 
-<!-- 页脚 -->
 <footer>
     <div class="container footer-inner">
         <a href="index.html" class="footer-logo">
@@ -249,7 +172,7 @@
             <span>Nebula EduHub</span>
         </a>
         <div class="footer-links">
-            <a href="search.html">资料检索</a>
+            <a href="search.html">资料下载</a>
             <a href="tools.html">下载工具</a>
             <a href="packages.html">网校通</a>
             <a href="about.html">关于</a>
@@ -259,5 +182,139 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+const materials = [
+    { name: "人教版英语九年级上册（官方版）", file: "人教版英语九年级上册.pdf", category: "电子课本", size: "12MB", icon: "📘" },
+    { name: "人教版英语八年级下册", file: "人教版英语八年级下册.pdf", category: "电子课本", size: "18MB", icon: "📗" },
+
+    { name: "全品作业本九上数学 第一章 特殊平行四边形", file: "全品作业本九上数学_第一章特殊平行四边形.pdf", category: "全品作业本", size: "8.6MB", icon: "📐" },
+    { name: "全品作业本九上数学 第二章 一元二次方程", file: "全品作业本九上数学_第二章一元二次方程.pdf", category: "全品作业本", size: "7.8MB", icon: "📐" },
+    { name: "全品作业本九上数学 第三章 概率的进一步认识", file: "全品作业本九上数学_第三章概率的进一步认识.pdf", category: "全品作业本", size: "9.5MB", icon: "📐" },
+    { name: "全品作业本九上数学 第四章 图形的相似", file: "全品作业本九上数学_第四章图形的相似.pdf", category: "全品作业本", size: "2.4MB", icon: "📐" },
+    { name: "全品作业本九上数学 第五章 投影与视图", file: "全品作业本九上数学_第五章投影与视图.pdf", category: "全品作业本", size: "13MB", icon: "📐" },
+    { name: "全品作业本九上数学 第六章 反比例函数", file: "全品作业本九上数学_第六章反比例函数.pdf", category: "全品作业本", size: "4.4MB", icon: "📐" },
+    { name: "全品作业本八下数学 第二章 一元一次不等式", file: "全品作业本八下数学_第二章一元一次不等式.pdf", category: "全品作业本", size: "6.4MB", icon: "📐" },
+    { name: "全品作业本八下数学 第四章 因式分解", file: "全品作业本八下数学_第四章因式分解.pdf", category: "全品作业本", size: "2.7MB", icon: "📐" },
+    { name: "全品作业本八下数学 第五章 分式与分式方程", file: "全品作业本八下数学_第五章分式与分式方程.pdf", category: "全品作业本", size: "6.0MB", icon: "📐" },
+    { name: "全品作业本八下数学 第六章 平行四边形", file: "全品作业本八下数学_第六章平行四边形.pdf", category: "全品作业本", size: "6.3MB", icon: "📐" },
+
+    { name: "八下数学周周清 第4期", file: "八下数学周周清_第4期.pdf", category: "八下数学试卷", size: "1.7MB", icon: "📝" },
+    { name: "八下数学周周清 第5期", file: "八下数学周周清_第5期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第6期", file: "八下数学周周清_第6期.pdf", category: "八下数学试卷", size: "1.0MB", icon: "📝" },
+    { name: "八下数学周周清 第7期", file: "八下数学周周清_第7期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第8期", file: "八下数学周周清_第8期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第9期", file: "八下数学周周清_第9期.pdf", category: "八下数学试卷", size: "0.8MB", icon: "📝" },
+    { name: "八下数学周周清 第10期", file: "八下数学周周清_第10期.pdf", category: "八下数学试卷", size: "2.0MB", icon: "📝" },
+    { name: "八下数学周周清 第11期", file: "八下数学周周清_第11期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第17期", file: "八下数学周周清_第17期.pdf", category: "八下数学试卷", size: "0.3MB", icon: "📝" },
+    { name: "八下数学周周清 第18期", file: "八下数学周周清_第18期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第19期", file: "八下数学周周清_第19期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第20期", file: "八下数学周周清_第20期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第21期", file: "八下数学周周清_第21期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第22期", file: "八下数学周周清_第22期.pdf", category: "八下数学试卷", size: "3.2MB", icon: "📝" },
+    { name: "八下数学周周清 第23期", file: "八下数学周周清_第23期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第24期", file: "八下数学周周清_第24期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第25期", file: "八下数学周周清_第25期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第26期", file: "八下数学周周清_第26期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第27期", file: "八下数学周周清_第27期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第29期", file: "八下数学周周清_第29期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第30期", file: "八下数学周周清_第30期.pdf", category: "八下数学试卷", size: "0.8MB", icon: "📝" },
+    { name: "八下数学周周清 第31期", file: "八下数学周周清_第31期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第32期", file: "八下数学周周清_第32期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第36期", file: "八下数学周周清_第36期.pdf", category: "八下数学试卷", size: "1.8MB", icon: "📝" },
+    { name: "八下数学 平行四边形专题训练", file: "八下数学_平行四边形专题训练.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学期中试卷 参考答案", file: "八下数学期中试卷_参考答案.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
+    { name: "莲湖区2022-2023八下期末数学试题", file: "莲湖区2022-2023八下期末数学试题.pdf", category: "八下数学试卷", size: "1.3MB", icon: "📝" },
+    { name: "八年级数学期末模拟卷", file: "八年级数学期末模拟卷.pdf", category: "八下数学试卷", size: "1.6MB", icon: "📝" },
+
+    { name: "二次函数专题1 求目标点横纵比大小", file: "二次函数专题1_求目标点横纵比大小.pdf", category: "专题训练", size: "4.0MB", icon: "🎯" },
+    { name: "二次函数专题2 平移二次函数", file: "二次函数专题2_平移二次函数.pdf", category: "专题训练", size: "3.9MB", icon: "🎯" },
+    { name: "二次函数专题3 配方法求最值", file: "二次函数专题3_配方法求最值.pdf", category: "专题训练", size: "1.2MB", icon: "🎯" },
+    { name: "2024交大附中1-6模 二次函数应用题", file: "2024交大附中1-6模_二次函数应用题.pdf", category: "专题训练", size: "0.6MB", icon: "🎯" },
+    { name: "2024师大附中1-9模 二次函数选择题", file: "2024师大附中1-9模_二次函数选择题.pdf", category: "专题训练", size: "0.5MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 二次函数综合题", file: "2024西工大附中1-9模_二次函数综合题.pdf", category: "专题训练", size: "1.1MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 二次函数选择题", file: "2024西工大附中1-9模_二次函数选择题.pdf", category: "专题训练", size: "0.7MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 三角函数测高题", file: "2024西工大附中1-9模_三角函数测高题.pdf", category: "专题训练", size: "5.8MB", icon: "🎯" },
+    { name: "2025铁一中1-8模 三角函数测高题", file: "2025铁一中1-8模_三角函数测高题.pdf", category: "专题训练", size: "1.4MB", icon: "🎯" },
+    { name: "2025陕师大附中1-9模 三角函数测高大题", file: "2025陕师大附中1-9模_三角函数测高大题.pdf", category: "专题训练", size: "1.7MB", icon: "🎯" },
+    { name: "三角函数计算练习", file: "三角函数计算练习.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "一元二次方程 传染问题", file: "一元二次方程_传染问题.pdf", category: "专题训练", size: "0.8MB", icon: "🎯" },
+    { name: "一元二次方程 利润每每问题", file: "一元二次方程_利润每每问题.pdf", category: "专题训练", size: "0.9MB", icon: "🎯" },
+    { name: "一元二次方程 围栏问题", file: "一元二次方程_围栏问题.pdf", category: "专题训练", size: "0.5MB", icon: "🎯" },
+    { name: "解一元二次方程计算练习", file: "解一元二次方程计算练习.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "韦达定理专练", file: "韦达定理专练.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "2026年陕西省中考数学试题", file: "2026年陕西省中考数学试题.pdf", category: "专题训练", size: "1.2MB", icon: "🎯" },
+
+    { name: "七上数学 一元一次方程测试", file: "七上数学_一元一次方程测试.pdf", category: "七上数学试卷", size: "1.1MB", icon: "📝" },
+    { name: "七上数学 12月4日测试题", file: "七上数学_12月4日测试题.pdf", category: "七上数学试卷", size: "0.7MB", icon: "📝" },
+    { name: "七上数学 12月18日测试卷", file: "七上数学_12月18日测试卷.pdf", category: "七上数学试卷", size: "1.8MB", icon: "📝" },
+
+    { name: "高中数学A版 必修第一册", file: "高中数学A版_数学 必修 第一册（A版）.pdf", category: "高中数学教材", size: "22MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第一册", file: "高中数学A版_数学 选择性必修 第一册（A版）.pdf", category: "高中数学教材", size: "20MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第二册", file: "高中数学A版_数学 选择性必修 第二册（A版）.pdf", category: "高中数学教材", size: "16MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第三册", file: "高中数学A版_数学 选择性必修 第三册（A版）.pdf", category: "高中数学教材", size: "20MB", icon: "📕" },
+    { name: "高中数学B版 必修第一册", file: "高中数学B版_数学 必修 第一册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 必修第二册", file: "高中数学B版_数学 必修 第二册（B版）.pdf", category: "高中数学教材", size: "18MB", icon: "📘" },
+    { name: "高中数学B版 必修第三册", file: "高中数学B版_数学 必修 第三册（B版）.pdf", category: "高中数学教材", size: "16MB", icon: "📘" },
+    { name: "高中数学B版 必修第四册", file: "高中数学B版_数学 必修 第四册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第一册", file: "高中数学B版_数学 选择性必修 第一册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第二册", file: "高中数学B版_数学 选择性必修 第二册（B版）.pdf", category: "高中数学教材", size: "21MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第三册", file: "高中数学B版_数学 选择性必修 第三册（B版）.pdf", category: "高中数学教材", size: "12MB", icon: "📘" },
+];
+
+const categoryOrder = ["电子课本", "全品作业本", "八下数学试卷", "专题训练", "七上数学试卷", "高中数学教材"];
+const categoryIcons = {
+    "电子课本": "📚", "全品作业本": "📐", "八下数学试卷": "📝",
+    "专题训练": "🎯", "七上数学试卷": "📝", "高中数学教材": "📕"
+};
+
+function renderMaterials(filter = "") {
+    const container = document.getElementById("materialsContainer");
+    const keyword = filter.toLowerCase().trim();
+    let html = "";
+
+    categoryOrder.forEach(cat => {
+        const items = materials.filter(m => m.category === cat &&
+            (!keyword || m.name.toLowerCase().includes(keyword) || m.category.toLowerCase().includes(keyword)));
+        if (items.length === 0) return;
+
+        html += `<div class="category-section">`;
+        html += `<div class="category-title">${categoryIcons[cat] || "📁"} ${cat}<span class="count">${items.length}份</span></div>`;
+        html += `<div class="material-grid">`;
+
+        items.forEach(m => {
+            const filePath = `materials/${m.category}/${m.file}`;
+            const encodedPath = encodeURIComponent(filePath).replace(/%2F/g, '/');
+            html += `
+            <div class="material-card">
+                <div class="material-icon">${m.icon}</div>
+                <div class="material-info">
+                    <div class="material-name">${m.name}</div>
+                    <div class="material-meta">${m.size || ""}</div>
+                </div>
+                <div class="material-actions">
+                    <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
+                    <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
+                </div>
+            </div>`;
+        });
+
+        html += `</div></div>`;
+    });
+
+    if (!html) {
+        html = `<div style="text-align:center;padding:40px;color:var(--text-muted);">没有找到匹配的资料</div>`;
+    }
+    container.innerHTML = html;
+}
+
+function filterMaterials() {
+    const kw = document.getElementById("materialSearch").value;
+    renderMaterials(kw);
+}
+
+renderMaterials();
+</script>
+
 </body>
 </html>
