@@ -1,0 +1,159 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    background:#f7f7f7;
+    color:#222;
+    line-height:1.6;
+}
+header{
+    background:#2c3e50;
+    color:#fff;
+    padding:16px 20px;
+}
+header h1{
+    font-size:22px;
+    margin-bottom:8px;
+}
+nav a{
+    color:#ddd;
+    text-decoration:none;
+    margin-right:14px;
+}
+nav a:hover{
+    color:#fff;
+}
+.container{
+    max-width:1100px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns: 3fr 1fr;
+    gap:24px;
+    padding:0 16px;
+}
+main{
+    background:#fff;
+    padding:20px;
+    border-radius:6px;
+    box-shadow:0 1px 3px #ccc;
+}
+aside{
+
+}
+.side-box{
+    background:#fff;
+    padding:16px;
+    border-radius:6px;
+    box-shadow:0 1px 3px #ccc;
+}
+.search-box{
+    background:#f2f5f8;
+    padding:20px;
+    border-radius:6px;
+    margin-bottom:24px;
+}
+.search-box input{
+    width:70%;
+    padding:8px 10px;
+    font-size:16px;
+}
+.search-box button{
+    padding:8px 16px;
+    background:#2c3e50;
+    color:white;
+    border:none;
+    border-radius:4px;
+}
+.recent-list ul{
+    list-style:none;
+    margin:10px 0;
+}
+.recent-list li{
+    padding:6px 0;
+    border-bottom:1px solid #eee;
+}
+.recent-list a{
+    color:#005299;
+    text-decoration:none;
+}
+.tag{
+    color:#666;
+    font-size:13px;
+    margin-left:10px;
+}
+.tip{
+    color:#666;
+    font-size:13px;
+    margin-top:8px;
+}
+.filter-bar{
+    padding:12px;
+    background:#f4f7fa;
+    border-radius:5px;
+    margin-bottom:20px;
+}
+.filter-bar select{
+    padding:6px;
+    margin-right:8px;
+}
+.item{
+    border:1px solid #e5e5e5;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:4px;
+}
+.tags span{
+    display:inline-block;
+    background:#e8f0f7;
+    padding:2px 7px;
+    font-size:12px;
+    margin-right:4px;
+    border-radius:3px;
+}
+.price-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+}
+.price-table th,.price-table td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+.price-table th{
+    background:#f0f3f7;
+}
+.buy-tip{
+    background:#fff3cd;
+    padding:12px;
+    border-radius:5px;
+    margin-top:16px;
+}
+.tool-card{
+    border:1px solid #ddd;
+    padding:14px;
+    margin-bottom:12px;
+    border-radius:5px;
+}
+.notice{
+    background:#e8f4f8;
+    padding:14px;
+    border-radius:5px;
+    margin-bottom:20px;
+}
+footer{
+    text-align:center;
+    padding:20px;
+    color:#666;
+    font-size:13px;
+    margin-top:30px;
+}
+
+@media(max-width:768px){
+    .container{
+        grid-template-columns:1fr;
+    }
+}
