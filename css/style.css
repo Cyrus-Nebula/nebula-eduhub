@@ -1,95 +1,99 @@
-/* 对标 scratchhcr.de5.net 手写个人站风格，无AI模板感 */
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: system-ui, "PingFang SC", sans‑serif;
-    background-color: #ffffff;
-    color: #000000;
-    line‑height: 1.7;
-    max‑width: 720px;
-    margin: 28px auto;
-    padding: 0 20px;
+    font-family: system-ui, "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: #ffffff;
+    color: #111111;
+    line-height: 1.8;
+    max-width: 740px;
+    margin: 40px auto;
+    padding: 0 24px;
 }
 
 h1 {
-    font‑size: 24px;
-    margin‑bottom: 8px;
-    font‑weight: 600;
-}
-
-h2 {
-    font‑size: 20px;
-    margin: 28px 0 10px;
-    font‑weight: 600;
-}
-
-h3 {
-    font‑size: 17px;
-    margin:16px 0 6px;
-    font‑weight:600;
+    font-size: 28px;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 
 nav {
-    margin‑bottom:24px;
+    margin-bottom: 24px;
+    font-size: 16px;
 }
 
 nav a {
-    color:#0000ee;
-    text‑decoration:none;
-    margin‑right:14px;
+    color: #0000ee;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+nav a:first-child {
+    margin-left: 0;
 }
 
 nav a:hover {
-    text‑decoration:underline;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 36px 0 12px;
+    font-weight: 600;
 }
 
 a {
-    color:#0000ee;
-    text‑decoration:none;
+    color: #0000ee;
+    text-decoration: none;
 }
 
 a:hover {
-    text‑decoration:underline;
+    text-decoration: underline;
 }
 
-ul {
-    padding‑left:24px;
-    margin‑bottom:12px;
-}
-
-li {
-    margin:7px 0;
-}
-
-.search‑box {
-    margin:12px 0 20px;
+.search-box {
+    margin: 14px 0 26px;
 }
 
 input[type="text"] {
-    padding:5px 7px;
-    border:1px solid #777;
+    padding: 7px 9px;
+    border: 1px solid #999;
+    font-size: 15px;
+    width: 320px;
 }
 
 button {
-    padding:5px 10px;
+    padding: 7px 12px;
+    font-size: 15px;
+    border: 1px solid #777;
+    background: #f5f5f5;
+    cursor: pointer;
 }
 
-.note‑text {
-    color:#333;
-    margin:8px 0 16px;
+ul {
+    padding-left: 26px;
+    margin-bottom: 14px;
+}
+
+li {
+    margin: 9px 0;
+}
+
+.note {
+    color: #333333;
+    margin: 10px 0 18px;
 }
 
 hr {
-    border:none;
-    border‑top:1px solid #aaa;
-    margin:32px 0;
+    border: none;
+    border-top: 1px solid #bbbbbb;
+    margin: 36px 0;
 }
 
 .footer {
-    margin‑top:40px;
-    font‑size:14px;
-    color:#444;
+    margin-top: 48px;
+    font-size: 14px;
+    color: #444444;
 }
