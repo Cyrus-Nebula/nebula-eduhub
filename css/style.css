@@ -1,111 +1,95 @@
+/* 对标 scratchhcr.de5.net 手写个人站风格，无AI模板感 */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
-    background-color: #f8f9fa;
-    color: #2c3e50;
-    line-height: 1.75;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 24px;
+    font-family: system-ui, "PingFang SC", sans‑serif;
+    background-color: #ffffff;
+    color: #000000;
+    line‑height: 1.7;
+    max‑width: 720px;
+    margin: 28px auto;
+    padding: 0 20px;
 }
 
-header {
-    margin-bottom: 36px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #cbd5e1;
-}
-
-header h1 {
-    font-size: 26px;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-bottom: 10px;
-}
-
-nav {
-    display: flex;
-    gap: 24px;
-}
-
-nav a {
-    color: #1e3a8a;
-    text-decoration: none;
-    font-size: 15px;
-}
-
-nav a:hover {
-    text-decoration: underline;
+h1 {
+    font‑size: 24px;
+    margin‑bottom: 8px;
+    font‑weight: 600;
 }
 
 h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin: 32px 0 14px;
+    font‑size: 20px;
+    margin: 28px 0 10px;
+    font‑weight: 600;
 }
 
-.search-box {
-    margin-bottom: 24px;
+h3 {
+    font‑size: 17px;
+    margin:16px 0 6px;
+    font‑weight:600;
 }
 
-input[type="text"] {
-    padding: 9px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    width: 340px;
-    font-size: 15px;
+nav {
+    margin‑bottom:24px;
 }
 
-button {
-    padding: 9px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #1e3a8a;
-    color: #ffffff;
-    font-size: 15px;
-    cursor: pointer;
+nav a {
+    color:#0000ee;
+    text‑decoration:none;
+    margin‑right:14px;
 }
 
-button:hover {
-    background-color: #172554;
+nav a:hover {
+    text‑decoration:underline;
+}
+
+a {
+    color:#0000ee;
+    text‑decoration:none;
+}
+
+a:hover {
+    text‑decoration:underline;
 }
 
 ul {
-    padding-left: 26px;
-    margin-bottom: 12px;
+    padding‑left:24px;
+    margin‑bottom:12px;
 }
 
 li {
-    margin: 10px 0;
+    margin:7px 0;
 }
 
-li a {
-    color: #1e40af;
-    text-decoration: none;
+.search‑box {
+    margin:12px 0 20px;
 }
 
-li a:hover {
-    text-decoration: underline;
+input[type="text"] {
+    padding:5px 7px;
+    border:1px solid #777;
 }
 
-.block-note {
-    color: #475569;
-    margin: 8px 0 16px;
+button {
+    padding:5px 10px;
+}
+
+.note‑text {
+    color:#333;
+    margin:8px 0 16px;
 }
 
 hr {
-    border: none;
-    border-top: 1px solid #e2e8f0;
-    margin: 40px 0;
+    border:none;
+    border‑top:1px solid #aaa;
+    margin:32px 0;
 }
 
 .footer {
-    margin-top: 48px;
-    font-size: 14px;
-    color: #64748b;
+    margin‑top:40px;
+    font‑size:14px;
+    color:#444;
 }
