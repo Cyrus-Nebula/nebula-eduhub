@@ -3,92 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>资料检索 - 个人学习资料归档库</title>
+    <title>资料检索 - Nebula EduHub</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>个人学习资料归档库</h1>
-        <nav>
-            <a href="index.html">首页</a>
-            <a href="search.html">资料检索</a>
-            <a href="tools.html">下载工具</a>
-            <a href="packages.html">网校通服务(附带)</a>
-            <a href="about.html">关于本站</a>
-        </nav>
-    </header>
 
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="container nav-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">N</div>
+            <span class="logo-text">Nebula<span>EduHub</span></span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="search.html" class="active">资料检索</a></li>
+            <li><a href="tools.html">下载工具</a></li>
+            <li><a href="packages.html">网校通服务</a></li>
+            <li><a href="about.html">关于本站</a></li>
+            <li><a href="about.html#contact" class="nav-cta">加微信咨询</a></li>
+        </ul>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+</nav>
+
+<!-- 页面标题 -->
+<section class="page-hero">
     <div class="container">
-        <main>
-            <div class="filter-bar">
-                <h3>筛选条件</h3>
-                <select id="grade">
+        <div class="badge">📂 资料检索</div>
+        <h1>学习资料<span>索引库</span></h1>
+        <p>按年级、学科、类型筛选，快速找到你需要的资料。持续更新中。</p>
+    </div>
+</section>
+
+<!-- 搜索框 -->
+<div class="container">
+    <div class="search-hero">
+        <div class="search-input-wrap">
+            <input type="text" id="searchInput" placeholder="输入关键词，比如「九年级数学」「古诗文」…" oninput="doSearch()">
+            <button class="btn btn-primary" onclick="doSearch()">搜索</button>
+        </div>
+    </div>
+</div>
+
+<!-- 筛选 + 列表 -->
+<section class="section" style="padding-top:10px;">
+    <div class="container">
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <div class="field">
+                <label>年级</label>
+                <select id="filterGrade" onchange="applyFilter()">
                     <option value="">全部年级</option>
-                    <option>七年级</option>
-                    <option>八年级</option>
-                    <option>九年级</option>
-                    <option>中考</option>
+                    <option value="七年级">七年级</option>
+                    <option value="八年级">八年级</option>
+                    <option value="九年级">九年级</option>
+                    <option value="中考">中考</option>
                 </select>
-                <select id="subject">
+            </div>
+            <div class="field">
+                <label>学科</label>
+                <select id="filterSubject" onchange="applyFilter()">
                     <option value="">全部学科</option>
-                    <option>语文</option>
-                    <option>数学</option>
-                    <option>英语</option>
-                    <option>物理</option>
-                    <option>化学</option>
+                    <option value="语文">语文</option>
+                    <option value="数学">数学</option>
+                    <option value="英语">英语</option>
+                    <option value="物理">物理</option>
+                    <option value="化学">化学</option>
                 </select>
-                <select id="type">
+            </div>
+            <div class="field">
+                <label>类型</label>
+                <select id="filterType" onchange="applyFilter()">
                     <option value="">全部类型</option>
-                    <option>试卷</option>
-                    <option>课件</option>
-                    <option>教案</option>
-                    <option>讲义</option>
+                    <option value="试卷">试卷</option>
+                    <option value="课件">课件</option>
+                    <option value="教案">教案</option>
+                    <option value="讲义">讲义</option>
+                    <option value="电子课本">电子课本</option>
                 </select>
-                <button onclick="filterList()">筛选</button>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="resetFilter()">重置</button>
+        </div>
+
+        <!-- 资料列表 -->
+        <div class="resource-list" id="resourceList">
+
+            <div class="resource-row" data-grade="九年级" data-subject="数学" data-type="试卷" data-name="九年级数学上册 单元测试卷">
+                <div class="icon" style="background:#dbeafe;">📐</div>
+                <div class="body">
+                    <h4>九年级数学上册 单元测试卷</h4>
+                    <div class="tags">
+                        <span class="tag">九年级</span>
+                        <span class="tag">数学</span>
+                        <span class="tag">试卷</span>
+                    </div>
+                    <div class="note">单元复习练习，涵盖一元二次方程、旋转、圆等核心章节，含详细答案解析。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
             </div>
 
-            <div class="result-list">
-                <h3>资料索引列表</h3>
-                <div class="item">
+            <div class="resource-row" data-grade="初中" data-subject="语文" data-type="讲义" data-name="初中语文古诗文汇总讲义">
+                <div class="icon" style="background:#dcfce7;">📖</div>
+                <div class="body">
+                    <h4>初中语文古诗文汇总讲义</h4>
+                    <div class="tags">
+                        <span class="tag">初中</span>
+                        <span class="tag">语文</span>
+                        <span class="tag">讲义</span>
+                    </div>
+                    <div class="note">七至九年级必背古诗文全集，含注释、翻译与常考题型归纳。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+            <div class="resource-row" data-grade="八年级" data-subject="物理" data-type="课件" data-name="物理八年级全套课件">
+                <div class="icon" style="background:#fef3c7;">⚗️</div>
+                <div class="body">
+                    <h4>物理八年级全套课件</h4>
+                    <div class="tags">
+                        <span class="tag">八年级</span>
+                        <span class="tag">物理</span>
+                        <span class="tag">课件</span>
+                    </div>
+                    <div class="note">人教版八年级物理上下册 PPT 课件，配套实验演示与课堂练习。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+            <div class="resource-row" data-grade="中考" data-subject="化学" data-type="教案" data-name="中考化学专题复习教案">
+                <div class="icon" style="background:#fce7f3;">🧪</div>
+                <div class="body">
+                    <h4>中考化学专题复习教案</h4>
+                    <div class="tags">
+                        <span class="tag">中考</span>
+                        <span class="tag">化学</span>
+                        <span class="tag">教案</span>
+                    </div>
+                    <div class="note">按中考考点划分专题，含知识梳理、例题精讲与变式训练。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+            <div class="resource-row" data-grade="九年级" data-subject="数学" data-type="试卷" data-name="九年级数学 二次函数专题卷">
+                <div class="icon" style="background:#dbeafe;">📝</div>
+                <div class="body">
                     <h4>九年级数学 二次函数专题卷</h4>
                     <div class="tags">
-                        <span>九年级</span><span>数学</span><span>试卷</span>
+                        <span class="tag">九年级</span>
+                        <span class="tag">数学</span>
+                        <span class="tag">试卷</span>
                     </div>
-                    <p>备注：单元复习练习，适合刷题</p>
+                    <div class="note">二次函数压轴题分类训练，求目标点横纵比大小等经典题型，附详细解析。</div>
                 </div>
-                <div class="item">
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+            <div class="resource-row" data-grade="八年级" data-subject="物理" data-type="课件" data-name="八年级物理 压强课件PPT">
+                <div class="icon" style="background:#fef3c7;">⚗️</div>
+                <div class="body">
                     <h4>八年级物理 压强课件PPT</h4>
                     <div class="tags">
-                        <span>八年级</span><span>物理</span><span>课件</span>
+                        <span class="tag">八年级</span>
+                        <span class="tag">物理</span>
+                        <span class="tag">课件</span>
                     </div>
-                    <p>备注：课堂教学使用</p>
+                    <div class="note">课堂教学使用，含固体压强、液体压强、大气压强全套课件。</div>
                 </div>
-                <div class="item">
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+            <div class="resource-row" data-grade="中考" data-subject="语文" data-type="讲义" data-name="中考语文文言文复习讲义">
+                <div class="icon" style="background:#dcfce7;">📖</div>
+                <div class="body">
                     <h4>中考语文文言文复习讲义</h4>
                     <div class="tags">
-                        <span>中考</span><span>语文</span><span>讲义</span>
+                        <span class="tag">中考</span>
+                        <span class="tag">语文</span>
+                        <span class="tag">讲义</span>
                     </div>
-                    <p>备注：知识点汇总</p>
+                    <div class="note">中考必考文言文知识点汇总，含实词虚词、句式翻译、真题演练。</div>
                 </div>
-                <p class="tip">> 你可以不断复制item块，添加自己收集的资料索引。</p>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
             </div>
-        </main>
 
-        <aside>
-            <div class="side-box">
-                <h4>附带业务：学科网网校通</h4>
-                <p>本站主要用于个人资料整理，网校通为副业顺带服务。</p>
-                <p><a href="packages.html">查看套餐详情 →</a></p>
-                <hr>
-                <h4>联系</h4>
-                <p>微信：xueku2024</p>
+            <div class="resource-row" data-grade="九年级" data-subject="英语" data-type="电子课本" data-name="人教版九年级英语下册（彩色版）">
+                <div class="icon" style="background:#e0e7ff;">📘</div>
+                <div class="body">
+                    <h4>人教版九年级英语下册（彩色版）</h4>
+                    <div class="tags">
+                        <span class="tag">九年级</span>
+                        <span class="tag">英语</span>
+                        <span class="tag">电子课本</span>
+                    </div>
+                    <div class="note">高清彩色版电子课本，可打印可在线阅读，配套课文音频。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
             </div>
-        </aside>
+
+            <div class="resource-row" data-grade="八年级" data-subject="英语" data-type="电子课本" data-name="人教版英语八年级下册">
+                <div class="icon" style="background:#e0e7ff;">📗</div>
+                <div class="body">
+                    <h4>人教版英语八年级下册</h4>
+                    <div class="tags">
+                        <span class="tag">八年级</span>
+                        <span class="tag">英语</span>
+                        <span class="tag">电子课本</span>
+                    </div>
+                    <div class="note">完整PDF，包含全部单元课文、单词表、语法讲解，适合预习复习。</div>
+                </div>
+                <div class="action">
+                    <a href="about.html#contact" class="btn btn-primary btn-sm">获取</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="list-tip">
+            💡 可以不断复制上面的 item 块，添加自己收集的资料索引。资料持续更新中，加微信获取最新资源。
+        </div>
     </div>
+</section>
 
-    <footer>
-        <p>本站为个人资料归档站点，仅做索引整理，不对外分发版权资源。</p>
-    </footer>
-    <script src="js/main.js"></script>
+<!-- 页脚 -->
+<footer>
+    <div class="container footer-inner">
+        <a href="index.html" class="footer-logo">
+            <div class="logo-icon">N</div>
+            <span>Nebula EduHub</span>
+        </a>
+        <div class="footer-links">
+            <a href="search.html">资料检索</a>
+            <a href="tools.html">下载工具</a>
+            <a href="packages.html">网校通</a>
+            <a href="about.html">关于</a>
+        </div>
+        <div class="footer-text">© 2025 Nebula EduHub · 专业资料服务</div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
