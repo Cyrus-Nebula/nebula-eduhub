@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人学习资料归档库</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>个人学习资料归档库</h1>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="search.html">资料检索</a>
+            <a href="tools.html">下载工具</a>
+            <a href="packages.html">网校通服务</a>
+            <a href="about.html">关于本站</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            <div class="search-box">
+                <h2>资料快速搜索</h2>
+                <input type="text" id="searchInput" placeholder="输入关键词、年级、学科">
+                <button onclick="goSearch()">搜索</button>
+            </div>
+
+            <section class="recent-list">
+                <h3>我的常用收藏资料</h3>
+                <ul>
+                    <li><a href="#">九年级数学上册 单元测试卷</a> <span class="tag">试卷｜九年级</span></li>
+                    <li><a href="#">初中语文古诗文汇总讲义</a> <span class="tag">讲义｜初中</span></li>
+                    <li><a href="#">物理八年级全套课件</a> <span class="tag">课件｜八年级</span></li>
+                    <li><a href="#">中考化学专题复习教案</a> <span class="tag">教案｜中考</span></li>
+                </ul>
+                <p class="tip">> 可以自行增删列表，用于自己快速查阅</p>
+            </section>
+        </main>
+
+        <aside>
+            <div class="side-box">
+                <h4>附带业务：学科网网校通</h4>
+                <p>本站主要用于个人资料整理，网校通为副业顺带服务。</p>
+                <p><a href="packages.html">查看套餐详情 →</a></p>
+                <hr>
+                <h4>联系</h4>
+                <p>微信：xueku2024</p>
+                <p>仅用于咨询网校通、工具业务，不提供公开资源下载。</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>本站为个人资料归档站点，仅做索引整理，不对外分发版权资源。</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
