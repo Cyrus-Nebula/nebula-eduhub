@@ -189,88 +189,97 @@
 <script src="js/main.js"></script>
 <script>
 const materials = [
-    { name: "人教版英语九年级上册（官方版）", file: "人教版英语九年级上册.pdf", category: "电子课本", size: "12MB", icon: "📘" },
-    { name: "人教版英语八年级下册", file: "人教版英语八年级下册.pdf", category: "电子课本", size: "18MB", icon: "📗" },
+    // ===== 英语 =====
+    { name: "人教版英语九年级上册（官方版）", file: "人教版英语九年级上册.pdf", subject: "英语", grade: "九年级", volume: "上册", type: "电子课本", size: "12MB", icon: "📘" },
+    { name: "人教版英语八年级下册", file: "人教版英语八年级下册.pdf", subject: "英语", grade: "八年级", volume: "下册", type: "电子课本", size: "18MB", icon: "📗" },
 
-    { name: "全品作业本九上数学 第一章 特殊平行四边形", file: "全品作业本九上数学_第一章特殊平行四边形.pdf", category: "全品作业本", size: "8.6MB", icon: "📐" },
-    { name: "全品作业本九上数学 第二章 一元二次方程", file: "全品作业本九上数学_第二章一元二次方程.pdf", category: "全品作业本", size: "7.8MB", icon: "📐" },
-    { name: "全品作业本九上数学 第三章 概率的进一步认识", file: "全品作业本九上数学_第三章概率的进一步认识.pdf", category: "全品作业本", size: "9.5MB", icon: "📐" },
-    { name: "全品作业本九上数学 第四章 图形的相似", file: "全品作业本九上数学_第四章图形的相似.pdf", category: "全品作业本", size: "2.4MB", icon: "📐" },
-    { name: "全品作业本九上数学 第五章 投影与视图", file: "全品作业本九上数学_第五章投影与视图.pdf", category: "全品作业本", size: "13MB", icon: "📐" },
-    { name: "全品作业本九上数学 第六章 反比例函数", file: "全品作业本九上数学_第六章反比例函数.pdf", category: "全品作业本", size: "4.4MB", icon: "📐" },
-    { name: "全品作业本八下数学 第二章 一元一次不等式", file: "全品作业本八下数学_第二章一元一次不等式.pdf", category: "全品作业本", size: "6.4MB", icon: "📐" },
-    { name: "全品作业本八下数学 第四章 因式分解", file: "全品作业本八下数学_第四章因式分解.pdf", category: "全品作业本", size: "2.7MB", icon: "📐" },
-    { name: "全品作业本八下数学 第五章 分式与分式方程", file: "全品作业本八下数学_第五章分式与分式方程.pdf", category: "全品作业本", size: "6.0MB", icon: "📐" },
-    { name: "全品作业本八下数学 第六章 平行四边形", file: "全品作业本八下数学_第六章平行四边形.pdf", category: "全品作业本", size: "6.3MB", icon: "📐" },
+    // ===== 数学 - 九年级 =====
+    { name: "全品作业本九上数学 第一章 特殊平行四边形", file: "全品作业本九上数学_第一章特殊平行四边形.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "8.6MB", icon: "📐" },
+    { name: "全品作业本九上数学 第二章 一元二次方程", file: "全品作业本九上数学_第二章一元二次方程.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "7.8MB", icon: "📐" },
+    { name: "全品作业本九上数学 第三章 概率的进一步认识", file: "全品作业本九上数学_第三章概率的进一步认识.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "9.5MB", icon: "📐" },
+    { name: "全品作业本九上数学 第四章 图形的相似", file: "全品作业本九上数学_第四章图形的相似.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "2.4MB", icon: "📐" },
+    { name: "全品作业本九上数学 第五章 投影与视图", file: "全品作业本九上数学_第五章投影与视图.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "13MB", icon: "📐" },
+    { name: "全品作业本九上数学 第六章 反比例函数", file: "全品作业本九上数学_第六章反比例函数.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "4.4MB", icon: "📐" },
 
-    { name: "八下数学周周清 第4期", file: "八下数学周周清_第4期.pdf", category: "八下数学试卷", size: "1.7MB", icon: "📝" },
-    { name: "八下数学周周清 第5期", file: "八下数学周周清_第5期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
-    { name: "八下数学周周清 第6期", file: "八下数学周周清_第6期.pdf", category: "八下数学试卷", size: "1.0MB", icon: "📝" },
-    { name: "八下数学周周清 第7期", file: "八下数学周周清_第7期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
-    { name: "八下数学周周清 第8期", file: "八下数学周周清_第8期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
-    { name: "八下数学周周清 第9期", file: "八下数学周周清_第9期.pdf", category: "八下数学试卷", size: "0.8MB", icon: "📝" },
-    { name: "八下数学周周清 第10期", file: "八下数学周周清_第10期.pdf", category: "八下数学试卷", size: "2.0MB", icon: "📝" },
-    { name: "八下数学周周清 第11期", file: "八下数学周周清_第11期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
-    { name: "八下数学周周清 第17期", file: "八下数学周周清_第17期.pdf", category: "八下数学试卷", size: "0.3MB", icon: "📝" },
-    { name: "八下数学周周清 第18期", file: "八下数学周周清_第18期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
-    { name: "八下数学周周清 第19期", file: "八下数学周周清_第19期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第20期", file: "八下数学周周清_第20期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第21期", file: "八下数学周周清_第21期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第22期", file: "八下数学周周清_第22期.pdf", category: "八下数学试卷", size: "3.2MB", icon: "📝" },
-    { name: "八下数学周周清 第23期", file: "八下数学周周清_第23期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
-    { name: "八下数学周周清 第24期", file: "八下数学周周清_第24期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
-    { name: "八下数学周周清 第25期", file: "八下数学周周清_第25期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第26期", file: "八下数学周周清_第26期.pdf", category: "八下数学试卷", size: "0.4MB", icon: "📝" },
-    { name: "八下数学周周清 第27期", file: "八下数学周周清_第27期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第29期", file: "八下数学周周清_第29期.pdf", category: "八下数学试卷", size: "0.5MB", icon: "📝" },
-    { name: "八下数学周周清 第30期", file: "八下数学周周清_第30期.pdf", category: "八下数学试卷", size: "0.8MB", icon: "📝" },
-    { name: "八下数学周周清 第31期", file: "八下数学周周清_第31期.pdf", category: "八下数学试卷", size: "0.7MB", icon: "📝" },
-    { name: "八下数学周周清 第32期", file: "八下数学周周清_第32期.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
-    { name: "八下数学周周清 第36期", file: "八下数学周周清_第36期.pdf", category: "八下数学试卷", size: "1.8MB", icon: "📝" },
-    { name: "八下数学 平行四边形专题训练", file: "八下数学_平行四边形专题训练.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
-    { name: "八下数学期中试卷 参考答案", file: "八下数学期中试卷_参考答案.pdf", category: "八下数学试卷", size: "0.6MB", icon: "📝" },
-    { name: "莲湖区2022-2023八下期末数学试题", file: "莲湖区2022-2023八下期末数学试题.pdf", category: "八下数学试卷", size: "1.3MB", icon: "📝" },
-    { name: "八年级数学期末模拟卷", file: "八年级数学期末模拟卷.pdf", category: "八下数学试卷", size: "1.6MB", icon: "📝" },
+    // ===== 数学 - 八年级 =====
+    { name: "全品作业本八下数学 第二章 一元一次不等式", file: "全品作业本八下数学_第二章一元一次不等式.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "6.4MB", icon: "📐" },
+    { name: "全品作业本八下数学 第四章 因式分解", file: "全品作业本八下数学_第四章因式分解.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "2.7MB", icon: "📐" },
+    { name: "全品作业本八下数学 第五章 分式与分式方程", file: "全品作业本八下数学_第五章分式与分式方程.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "6.0MB", icon: "📐" },
+    { name: "全品作业本八下数学 第六章 平行四边形", file: "全品作业本八下数学_第六章平行四边形.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "6.3MB", icon: "📐" },
+    { name: "八下数学周周清 第4期", file: "八下数学周周清_第4期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.7MB", icon: "📝" },
+    { name: "八下数学周周清 第5期", file: "八下数学周周清_第5期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第6期", file: "八下数学周周清_第6期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.0MB", icon: "📝" },
+    { name: "八下数学周周清 第7期", file: "八下数学周周清_第7期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第8期", file: "八下数学周周清_第8期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第9期", file: "八下数学周周清_第9期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.8MB", icon: "📝" },
+    { name: "八下数学周周清 第10期", file: "八下数学周周清_第10期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "2.0MB", icon: "📝" },
+    { name: "八下数学周周清 第11期", file: "八下数学周周清_第11期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第17期", file: "八下数学周周清_第17期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.3MB", icon: "📝" },
+    { name: "八下数学周周清 第18期", file: "八下数学周周清_第18期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第19期", file: "八下数学周周清_第19期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第20期", file: "八下数学周周清_第20期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第21期", file: "八下数学周周清_第21期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第22期", file: "八下数学周周清_第22期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "3.2MB", icon: "📝" },
+    { name: "八下数学周周清 第23期", file: "八下数学周周清_第23期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第24期", file: "八下数学周周清_第24期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第25期", file: "八下数学周周清_第25期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第26期", file: "八下数学周周清_第26期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.4MB", icon: "📝" },
+    { name: "八下数学周周清 第27期", file: "八下数学周周清_第27期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第29期", file: "八下数学周周清_第29期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.5MB", icon: "📝" },
+    { name: "八下数学周周清 第30期", file: "八下数学周周清_第30期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.8MB", icon: "📝" },
+    { name: "八下数学周周清 第31期", file: "八下数学周周清_第31期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.7MB", icon: "📝" },
+    { name: "八下数学周周清 第32期", file: "八下数学周周清_第32期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学周周清 第36期", file: "八下数学周周清_第36期.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.8MB", icon: "📝" },
+    { name: "八下数学 平行四边形专题训练", file: "八下数学_平行四边形专题训练.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.6MB", icon: "📝" },
+    { name: "八下数学期中试卷 参考答案", file: "八下数学期中试卷_参考答案.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "0.6MB", icon: "📝" },
+    { name: "莲湖区2022-2023八下期末数学试题", file: "莲湖区2022-2023八下期末数学试题.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.3MB", icon: "📝" },
+    { name: "八年级数学期末模拟卷", file: "八年级数学期末模拟卷.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.6MB", icon: "📝" },
 
-    { name: "二次函数专题1 求目标点横纵比大小", file: "二次函数专题1_求目标点横纵比大小.pdf", category: "专题训练", size: "4.0MB", icon: "🎯" },
-    { name: "二次函数专题2 平移二次函数", file: "二次函数专题2_平移二次函数.pdf", category: "专题训练", size: "3.9MB", icon: "🎯" },
-    { name: "二次函数专题3 配方法求最值", file: "二次函数专题3_配方法求最值.pdf", category: "专题训练", size: "1.2MB", icon: "🎯" },
-    { name: "2024交大附中1-6模 二次函数应用题", file: "2024交大附中1-6模_二次函数应用题.pdf", category: "专题训练", size: "0.6MB", icon: "🎯" },
-    { name: "2024师大附中1-9模 二次函数选择题", file: "2024师大附中1-9模_二次函数选择题.pdf", category: "专题训练", size: "0.5MB", icon: "🎯" },
-    { name: "2024西工大附中1-9模 二次函数综合题", file: "2024西工大附中1-9模_二次函数综合题.pdf", category: "专题训练", size: "1.1MB", icon: "🎯" },
-    { name: "2024西工大附中1-9模 二次函数选择题", file: "2024西工大附中1-9模_二次函数选择题.pdf", category: "专题训练", size: "0.7MB", icon: "🎯" },
-    { name: "2024西工大附中1-9模 三角函数测高题", file: "2024西工大附中1-9模_三角函数测高题.pdf", category: "专题训练", size: "5.8MB", icon: "🎯" },
-    { name: "2025铁一中1-8模 三角函数测高题", file: "2025铁一中1-8模_三角函数测高题.pdf", category: "专题训练", size: "1.4MB", icon: "🎯" },
-    { name: "2025陕师大附中1-9模 三角函数测高大题", file: "2025陕师大附中1-9模_三角函数测高大题.pdf", category: "专题训练", size: "1.7MB", icon: "🎯" },
-    { name: "三角函数计算练习", file: "三角函数计算练习.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
-    { name: "一元二次方程 传染问题", file: "一元二次方程_传染问题.pdf", category: "专题训练", size: "0.8MB", icon: "🎯" },
-    { name: "一元二次方程 利润每每问题", file: "一元二次方程_利润每每问题.pdf", category: "专题训练", size: "0.9MB", icon: "🎯" },
-    { name: "一元二次方程 围栏问题", file: "一元二次方程_围栏问题.pdf", category: "专题训练", size: "0.5MB", icon: "🎯" },
-    { name: "解一元二次方程计算练习", file: "解一元二次方程计算练习.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
-    { name: "韦达定理专练", file: "韦达定理专练.pdf", category: "专题训练", size: "0.2MB", icon: "🎯" },
-    { name: "2026年陕西省中考数学试题", file: "2026年陕西省中考数学试题.pdf", category: "专题训练", size: "1.2MB", icon: "🎯" },
+    // ===== 数学 - 七年级 =====
+    { name: "七上数学 一元一次方程测试", file: "七上数学_一元一次方程测试.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "1.1MB", icon: "📝" },
+    { name: "七上数学 12月4日测试题", file: "七上数学_12月4日测试题.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "0.7MB", icon: "📝" },
+    { name: "七上数学 12月18日测试卷", file: "七上数学_12月18日测试卷.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "1.8MB", icon: "📝" },
 
-    { name: "七上数学 一元一次方程测试", file: "七上数学_一元一次方程测试.pdf", category: "七上数学试卷", size: "1.1MB", icon: "📝" },
-    { name: "七上数学 12月4日测试题", file: "七上数学_12月4日测试题.pdf", category: "七上数学试卷", size: "0.7MB", icon: "📝" },
-    { name: "七上数学 12月18日测试卷", file: "七上数学_12月18日测试卷.pdf", category: "七上数学试卷", size: "1.8MB", icon: "📝" },
+    // ===== 数学 - 中考 =====
+    { name: "二次函数专题1 求目标点横纵比大小", file: "二次函数专题1_求目标点横纵比大小.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "4.0MB", icon: "🎯" },
+    { name: "二次函数专题2 平移二次函数", file: "二次函数专题2_平移二次函数.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "3.9MB", icon: "🎯" },
+    { name: "二次函数专题3 配方法求最值", file: "二次函数专题3_配方法求最值.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "1.2MB", icon: "🎯" },
+    { name: "2024交大附中1-6模 二次函数应用题", file: "2024交大附中1-6模_二次函数应用题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.6MB", icon: "🎯" },
+    { name: "2024师大附中1-9模 二次函数选择题", file: "2024师大附中1-9模_二次函数选择题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.5MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 二次函数综合题", file: "2024西工大附中1-9模_二次函数综合题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "1.1MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 二次函数选择题", file: "2024西工大附中1-9模_二次函数选择题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.7MB", icon: "🎯" },
+    { name: "2024西工大附中1-9模 三角函数测高题", file: "2024西工大附中1-9模_三角函数测高题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "5.8MB", icon: "🎯" },
+    { name: "2025铁一中1-8模 三角函数测高题", file: "2025铁一中1-8模_三角函数测高题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "1.4MB", icon: "🎯" },
+    { name: "2025陕师大附中1-9模 三角函数测高大题", file: "2025陕师大附中1-9模_三角函数测高大题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "1.7MB", icon: "🎯" },
+    { name: "三角函数计算练习", file: "三角函数计算练习.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "一元二次方程 传染问题", file: "一元二次方程_传染问题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.8MB", icon: "🎯" },
+    { name: "一元二次方程 利润每每问题", file: "一元二次方程_利润每每问题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.9MB", icon: "🎯" },
+    { name: "一元二次方程 围栏问题", file: "一元二次方程_围栏问题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.5MB", icon: "🎯" },
+    { name: "解一元二次方程计算练习", file: "解一元二次方程计算练习.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "韦达定理专练", file: "韦达定理专练.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.2MB", icon: "🎯" },
+    { name: "2026年陕西省中考数学试题", file: "2026年陕西省中考数学试题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "试卷", size: "1.2MB", icon: "📝" },
 
-    { name: "高中数学A版 必修第一册", file: "高中数学A版_数学 必修 第一册（A版）.pdf", category: "高中数学教材", size: "22MB", icon: "📕" },
-    { name: "高中数学A版 选择性必修第一册", file: "高中数学A版_数学 选择性必修 第一册（A版）.pdf", category: "高中数学教材", size: "20MB", icon: "📕" },
-    { name: "高中数学A版 选择性必修第二册", file: "高中数学A版_数学 选择性必修 第二册（A版）.pdf", category: "高中数学教材", size: "16MB", icon: "📕" },
-    { name: "高中数学A版 选择性必修第三册", file: "高中数学A版_数学 选择性必修 第三册（A版）.pdf", category: "高中数学教材", size: "20MB", icon: "📕" },
-    { name: "高中数学B版 必修第一册", file: "高中数学B版_数学 必修 第一册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
-    { name: "高中数学B版 必修第二册", file: "高中数学B版_数学 必修 第二册（B版）.pdf", category: "高中数学教材", size: "18MB", icon: "📘" },
-    { name: "高中数学B版 必修第三册", file: "高中数学B版_数学 必修 第三册（B版）.pdf", category: "高中数学教材", size: "16MB", icon: "📘" },
-    { name: "高中数学B版 必修第四册", file: "高中数学B版_数学 必修 第四册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
-    { name: "高中数学B版 选择性必修第一册", file: "高中数学B版_数学 选择性必修 第一册（B版）.pdf", category: "高中数学教材", size: "15MB", icon: "📘" },
-    { name: "高中数学B版 选择性必修第二册", file: "高中数学B版_数学 选择性必修 第二册（B版）.pdf", category: "高中数学教材", size: "21MB", icon: "📘" },
-    { name: "高中数学B版 选择性必修第三册", file: "高中数学B版_数学 选择性必修 第三册（B版）.pdf", category: "高中数学教材", size: "12MB", icon: "📘" },
+    // ===== 高中数学 =====
+    { name: "高中数学A版 必修第一册", file: "高中数学A版_数学 必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "22MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第一册", file: "高中数学A版_数学 选择性必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "20MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第二册", file: "高中数学A版_数学 选择性必修 第二册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "16MB", icon: "📕" },
+    { name: "高中数学A版 选择性必修第三册", file: "高中数学A版_数学 选择性必修 第三册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "20MB", icon: "📕" },
+    { name: "高中数学B版 必修第一册", file: "高中数学B版_数学 必修 第一册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 必修第二册", file: "高中数学B版_数学 必修 第二册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "18MB", icon: "📘" },
+    { name: "高中数学B版 必修第三册", file: "高中数学B版_数学 必修 第三册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "16MB", icon: "📘" },
+    { name: "高中数学B版 必修第四册", file: "高中数学B版_数学 必修 第四册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第一册", file: "高中数学B版_数学 选择性必修 第一册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "15MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第二册", file: "高中数学B版_数学 选择性必修 第二册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "21MB", icon: "📘" },
+    { name: "高中数学B版 选择性必修第三册", file: "高中数学B版_数学 选择性必修 第三册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "12MB", icon: "📘" },
 ];
 
-const categoryOrder = ["电子课本", "全品作业本", "八下数学试卷", "专题训练", "七上数学试卷", "高中数学教材"];
-const categoryIcons = {
-    "电子课本": "📚", "全品作业本": "📐", "八下数学试卷": "📝",
-    "专题训练": "🎯", "七上数学试卷": "📝", "高中数学教材": "📕"
+// 分类顺序
+const subjectOrder = ["英语", "数学", "高中数学"];
+const gradeOrder = ["七年级", "八年级", "九年级", "中考", "高中"];
+const volumeOrder = ["上册", "下册", "全一册"];
+const typeOrder = ["电子课本", "全品作业本", "试卷", "专题训练", "教材"];
+const subjectIcons = {
+    "英语": "🔤", "数学": "🔢", "高中数学": "📐"
 };
 
 // 小红书精选笔记数据
@@ -430,42 +439,92 @@ function renderMaterials(filter = "") {
     const keyword = filter.toLowerCase().trim();
     let html = "";
 
-    categoryOrder.forEach(cat => {
-        const items = materials.filter(m => m.category === cat &&
-            (!keyword || m.name.toLowerCase().includes(keyword) || m.category.toLowerCase().includes(keyword)));
-        if (items.length === 0) return;
+    // 按学科分组
+    subjectOrder.forEach(subject => {
+        const subjectItems = materials.filter(m => m.subject === subject &&
+            (!keyword || m.name.toLowerCase().includes(keyword) || m.type.toLowerCase().includes(keyword) || m.grade.toLowerCase().includes(keyword)));
+        if (subjectItems.length === 0) return;
 
         html += `<div class="category-section">`;
-        html += `<div class="category-title">${categoryIcons[cat] || "📁"} ${cat}<span class="count">${items.length}份</span></div>`;
-        html += `<div class="material-grid">`;
+        html += `<div class="category-title" style="font-size:20px;border-left-color:#1e40af;">${subjectIcons[subject] || "📁"} ${subject}<span class="count">${subjectItems.length}份</span></div>`;
 
-        items.forEach(m => {
-            const filePath = `materials/${m.category}/${m.file}`;
-            const encodedPath = encodeURIComponent(filePath).replace(/%2F/g, '/');
-            const isXhsDup = m.name === "2026年陕西省中考数学试题";
-            const xhsBtn = isXhsDup ? `<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>` : "";
-            html += `
-            <div class="material-card">
-                <div class="material-icon">${m.icon}</div>
-                <div class="material-info">
-                    <div class="material-name">${m.name}</div>
-                    <div class="material-meta">${m.size || ""}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
-                </div>
-                <div class="material-actions">
-                    ${xhsBtn}
-                    <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
-                    <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
-                </div>
+        // 按年级分组
+        gradeOrder.forEach(grade => {
+            const gradeItems = subjectItems.filter(m => m.grade === grade);
+            if (gradeItems.length === 0) return;
+
+            html += `<div style="margin:16px 0 12px;padding-left:12px;">
+                <span style="font-size:16px;font-weight:700;color:#374151;border-left:3px solid #3b82f6;padding-left:8px;">${grade}</span>
+                <span style="font-size:12px;color:#9ca3af;margin-left:8px;">${gradeItems.length}份</span>
             </div>`;
+
+            // 按册次分组
+            volumeOrder.forEach(volume => {
+                const volumeItems = gradeItems.filter(m => m.volume === volume);
+                if (volumeItems.length === 0) return;
+
+                html += `<div style="margin:12px 0 8px;padding-left:24px;">
+                    <span style="font-size:14px;font-weight:600;color:#6b7280;">📖 ${volume}</span>
+                    <span style="font-size:11px;color:#9ca3af;margin-left:6px;">${volumeItems.length}份</span>
+                </div>`;
+
+                // 按种类分组
+                typeOrder.forEach(type => {
+                    const typeItems = volumeItems.filter(m => m.type === type);
+                    if (typeItems.length === 0) return;
+
+                    html += `<div style="margin:8px 0 6px;padding-left:36px;">
+                        <span style="font-size:13px;font-weight:500;color:#9ca3af;">${type}</span>
+                    </div>`;
+                    html += `<div class="material-grid" style="margin-bottom:16px;">`;
+
+                    typeItems.forEach(m => {
+                        const filePath = `materials/${m.subject}/${m.grade}/${m.volume}/${m.type}/${m.file}`;
+                        // 实际文件路径还是原来的分类路径
+                        const actualPath = getActualPath(m);
+                        const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
+                        const isXhsDup = m.name === "2026年陕西省中考数学试题";
+                        const xhsBtn = isXhsDup ? `<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>` : "";
+                        html += `
+                        <div class="material-card">
+                            <div class="material-icon">${m.icon}</div>
+                            <div class="material-info">
+                                <div class="material-name">${m.name}</div>
+                                <div class="material-meta">${m.size || ""}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
+                            </div>
+                            <div class="material-actions">
+                                ${xhsBtn}
+                                <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
+                                <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
+                            </div>
+                        </div>`;
+                    });
+
+                    html += `</div>`;
+                });
+            });
         });
 
-        html += `</div></div>`;
+        html += `</div>`;
     });
 
     if (!html) {
         html = `<div style="text-align:center;padding:40px;color:var(--text-muted);">没有找到匹配的资料</div>`;
     }
     container.innerHTML = html;
+}
+
+// 获取实际文件路径（兼容旧的分类目录结构）
+function getActualPath(m) {
+    const pathMap = {
+        "电子课本": "电子课本",
+        "全品作业本": "全品作业本",
+        "试卷": m.grade === "八年级" ? "八下数学试卷" : (m.grade === "七年级" ? "七上数学试卷" : "专题训练"),
+        "专题训练": "专题训练",
+        "教材": "高中数学教材"
+    };
+    const category = pathMap[m.type] || m.type;
+    return `materials/${category}/${m.file}`;
 }
 
 function filterMaterials() {
