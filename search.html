@@ -156,8 +156,9 @@
         <div class="filter-bar" style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;justify-content:center;">
             <select id="filterSubject" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
                 <option value="">全部学科</option>
-                <option value="英语">英语</option>
+                <option value="语文">语文</option>
                 <option value="数学">数学</option>
+                <option value="英语">英语</option>
                 <option value="高中数学">高中数学</option>
             </select>
             <select id="filterGrade" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
@@ -188,19 +189,7 @@
     </div>
 </div>
 
-<!-- 电子教材二维码 -->
-<section class="section" style="padding: 20px 0 10px;">
-    <div class="container">
-        <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 16px; padding: 36px 40px; text-align: center;">
-            <h2 style="font-size: 22px; font-weight: 700; color: #1e40af; margin-bottom: 6px;">📚 电子教材大全</h2>
-            <p style="font-size: 14px; color: #3b82f6; margin-bottom: 20px;">扫码下载小学、初中、高中全年级全学科全版本电子课本</p>
-            <div style="background: white; border-radius: 12px; padding: 16px; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                <img src="images/textbook-qrcode.png" alt="扫码下载电子教材" style="width: 180px; height: 180px; display: block;">
-            </div>
-            <p style="font-size: 13px; color: #6b7280; margin-top: 14px;">微信扫一扫，获取全部电子课本</p>
-        </div>
-    </div>
-</section>
+<!-- 电子教材列表已整合到下方资料列表中 -->
 
 <section class="section" style="padding-top:10px;">
     <div class="container">
@@ -269,9 +258,35 @@
 <script src="js/main.js"></script>
 <script>
 const materials = [
-    // ===== 英语 =====
-    { name: "人教版英语九年级上册（官方版）", file: "人教版英语九年级上册.pdf", subject: "英语", grade: "九年级", volume: "上册", type: "电子课本", size: "12MB", icon: "📘" },
-    { name: "人教版英语八年级下册", file: "人教版英语八年级下册.pdf", subject: "英语", grade: "八年级", volume: "下册", type: "电子课本", size: "18MB", icon: "📗" },
+    // ===== 语文（统编版）=====
+    { name: "语文七年级上册（统编版·旧版）", file: "语文七年级上册 统编版.pdf", subject: "语文", grade: "七年级", volume: "上册", type: "电子课本", size: "5.5MB", icon: "📕", edition: "旧版" },
+    { name: "语文七年级下册（统编版·旧版）", file: "语文七年级下册 统编版.pdf", subject: "语文", grade: "七年级", volume: "下册", type: "电子课本", size: "7.8MB", icon: "📕", edition: "旧版" },
+    { name: "语文八年级上册（统编版·旧版）", file: "语文八年级上册 统编版.pdf", subject: "语文", grade: "八年级", volume: "上册", type: "电子课本", size: "7.4MB", icon: "📕", edition: "旧版" },
+    { name: "语文八年级下册（统编版·旧版）", file: "语文八年级下册 统编版.pdf", subject: "语文", grade: "八年级", volume: "下册", type: "电子课本", size: "5.5MB", icon: "📕", edition: "旧版" },
+    { name: "语文九年级上册（统编版·旧版）", file: "语文九年级上册 统编版.pdf", subject: "语文", grade: "九年级", volume: "上册", type: "电子课本", size: "5.7MB", icon: "📕", edition: "旧版" },
+    { name: "语文九年级下册（统编版·旧版）", file: "语文九年级下册 统编版.pdf", subject: "语文", grade: "九年级", volume: "下册", type: "电子课本", size: "8.0MB", icon: "📕", edition: "旧版" },
+
+    // ===== 数学（人教版）=====
+    { name: "数学七年级上册（人教版·新版）", file: "数学七年级上册 人教版.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", size: "9.0MB", icon: "📐", edition: "新版" },
+    { name: "数学七年级下册（人教版·新版）", file: "数学七年级下册 人教版.pdf", subject: "数学", grade: "七年级", volume: "下册", type: "电子课本", size: "23MB", icon: "📐", edition: "新版" },
+    { name: "数学八年级上册（人教版·新版）", file: "数学八年级上册 人教版.pdf", subject: "数学", grade: "八年级", volume: "上册", type: "电子课本", size: "6.4MB", icon: "📐", edition: "新版" },
+    { name: "数学八年级下册（人教版·新版）", file: "数学八年级下册 人教版.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "电子课本", size: "15MB", icon: "📐", edition: "新版" },
+    { name: "数学九年级上册（人教版·旧版）", file: "数学九年级上册 人教版.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "电子课本", size: "6.8MB", icon: "📐", edition: "旧版" },
+    { name: "数学九年级下册（人教版·旧版）", file: "数学九年级下册 人教版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子课本", size: "8.1MB", icon: "📐", edition: "旧版" },
+
+    // ===== 数学（北师大版）=====
+    { name: "数学七年级上册（北师大版·新版）", file: "数学七年级上册 北师版.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", size: "26MB", icon: "📐", edition: "新版" },
+    { name: "数学七年级下册（北师大版·新版）", file: "数学七年级下册 北师大版.pdf", subject: "数学", grade: "七年级", volume: "下册", type: "电子课本", size: "22MB", icon: "📐", edition: "新版" },
+    { name: "数学八年级上册（北师大版·新版）", file: "数学八年级上册 北师大版.pdf", subject: "数学", grade: "八年级", volume: "上册", type: "电子课本", size: "28MB", icon: "📐", edition: "新版" },
+    { name: "数学八年级下册（北师大版·新版）", file: "数学八年级下册  北师大版.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "电子课本", size: "22MB", icon: "📐", edition: "新版" },
+    { name: "数学九年级上册（北师大版·新版）", file: "数学九年级上册 北师大版.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "电子课本", size: "23MB", icon: "📐", edition: "新版" },
+    { name: "数学九年级下册（北师大版·新版）", file: "数学九年级下册 北师大版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子课本", size: "16MB", icon: "📐", edition: "新版" },
+
+    // ===== 英语（人教版）=====
+    { name: "英语七年级上册（人教版·旧版）", file: "英语七年级上册 人教版.pdf", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", size: "8.9MB", icon: "📘", edition: "旧版" },
+    { name: "英语八年级上册（人教版·旧版）", file: "英语八年级上册 人教版.pdf", subject: "英语", grade: "八年级", volume: "上册", type: "电子课本", size: "5.0MB", icon: "📘", edition: "旧版" },
+    { name: "英语八年级下册（人教版·旧版）", file: "英语八年级下册 人教版.pdf", subject: "英语", grade: "八年级", volume: "下册", type: "电子课本", size: "6.6MB", icon: "📗", edition: "旧版" },
+    { name: "英语九年级全一册（人教版·旧版）", file: "英语九年级全一册 人教版.pdf", subject: "英语", grade: "九年级", volume: "全一册", type: "电子课本", size: "11MB", icon: "📘", edition: "旧版" },
 
     // ===== 数学 - 九年级 =====
     { name: "全品作业本九上数学 第一章 特殊平行四边形", file: "全品作业本九上数学_第一章特殊平行四边形.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "8.6MB", icon: "📐" },
@@ -341,6 +356,7 @@ const materials = [
 
     // ===== 高中数学 =====
     { name: "高中数学A版 必修第一册", file: "高中数学A版_数学 必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "22MB", icon: "📕" },
+    { name: "高中数学A版 必修第二册", file: "高中数学A版_数学 必修 第二册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "66MB", icon: "📕" },
     { name: "高中数学A版 选择性必修第一册", file: "高中数学A版_数学 选择性必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "20MB", icon: "📕" },
     { name: "高中数学A版 选择性必修第二册", file: "高中数学A版_数学 选择性必修 第二册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "16MB", icon: "📕" },
     { name: "高中数学A版 选择性必修第三册", file: "高中数学A版_数学 选择性必修 第三册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "20MB", icon: "📕" },
@@ -354,12 +370,12 @@ const materials = [
 ];
 
 // 分类顺序
-const subjectOrder = ["英语", "数学", "高中数学"];
+const subjectOrder = ["语文", "数学", "英语", "高中数学"];
 const gradeOrder = ["七年级", "八年级", "九年级", "中考", "高中"];
 const volumeOrder = ["上册", "下册", "全一册"];
 const typeOrder = ["电子课本", "全品作业本", "试卷", "专题训练", "教材"];
 const subjectIcons = {
-    "英语": "🔤", "数学": "🔢", "高中数学": "📐"
+    "语文": "📕", "数学": "🔢", "英语": "🔤", "高中数学": "📐"
 };
 
 // 小红书精选笔记数据
@@ -594,12 +610,15 @@ function resetFilters() {
 
 // 获取实际文件路径（兼容旧的分类目录结构）
 function getActualPath(m) {
+    if (m.type === "电子课本") {
+        const gradeDir = m.grade + m.volume;
+        return `materials/电子课本/初中/${gradeDir}/${m.file}`;
+    }
     const pathMap = {
-        "电子课本": "电子课本",
         "全品作业本": "全品作业本",
         "试卷": m.grade === "八年级" ? "八下数学试卷" : (m.grade === "七年级" ? "七上数学试卷" : "专题训练"),
         "专题训练": "专题训练",
-        "教材": "高中数学教材"
+        "教材": "高中数学"
     };
     const category = pathMap[m.type] || m.type;
     return `materials/${category}/${m.file}`;
