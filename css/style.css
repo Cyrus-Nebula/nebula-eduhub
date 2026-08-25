@@ -1134,6 +1134,9 @@ footer {
     font-weight: 800;
     font-size: 18px;
 }
+.footer-brand span span {
+    color: var(--primary);
+}
 .footer-desc {
     font-size: 13px;
     line-height: 1.7;
