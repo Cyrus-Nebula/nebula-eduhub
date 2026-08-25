@@ -149,6 +149,38 @@
         <div class="search-input-wrap">
             <input type="text" id="materialSearch" placeholder="搜索资料名称，比如「二次函数」「全品」「八下」…" oninput="filterMaterials()">
         </div>
+        <div class="filter-bar" style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;justify-content:center;">
+            <select id="filterSubject" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
+                <option value="">全部学科</option>
+                <option value="英语">英语</option>
+                <option value="数学">数学</option>
+                <option value="高中数学">高中数学</option>
+            </select>
+            <select id="filterGrade" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
+                <option value="">全部年级</option>
+                <option value="七年级">七年级</option>
+                <option value="八年级">八年级</option>
+                <option value="九年级">九年级</option>
+                <option value="中考">中考</option>
+                <option value="高中">高中</option>
+            </select>
+            <select id="filterVolume" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
+                <option value="">全部册次</option>
+                <option value="上册">上册</option>
+                <option value="下册">下册</option>
+                <option value="全一册">全一册</option>
+            </select>
+            <select id="filterType" onchange="filterMaterials()" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
+                <option value="">全部种类</option>
+                <option value="电子课本">电子课本</option>
+                <option value="全品作业本">全品作业本</option>
+                <option value="试卷">试卷</option>
+                <option value="专题训练">专题训练</option>
+                <option value="教材">教材</option>
+            </select>
+            <button onclick="resetFilters()" style="padding:10px 18px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:#f9fafb;cursor:pointer;color:#6b7280;">重置</button>
+        </div>
+        <div id="filterResult" style="text-align:center;margin-top:12px;font-size:13px;color:#9ca3af;"></div>
     </div>
 </div>
 
@@ -437,81 +469,79 @@ function renderXhsNotes(filter = "") {
 function renderMaterials(filter = "") {
     const container = document.getElementById("materialsContainer");
     const keyword = filter.toLowerCase().trim();
-    let html = "";
-
-    // 按学科分组
-    subjectOrder.forEach(subject => {
-        const subjectItems = materials.filter(m => m.subject === subject &&
-            (!keyword || m.name.toLowerCase().includes(keyword) || m.type.toLowerCase().includes(keyword) || m.grade.toLowerCase().includes(keyword)));
-        if (subjectItems.length === 0) return;
-
-        html += `<div class="category-section">`;
-        html += `<div class="category-title" style="font-size:20px;border-left-color:#1e40af;">${subjectIcons[subject] || "📁"} ${subject}<span class="count">${subjectItems.length}份</span></div>`;
-
-        // 按年级分组
-        gradeOrder.forEach(grade => {
-            const gradeItems = subjectItems.filter(m => m.grade === grade);
-            if (gradeItems.length === 0) return;
-
-            html += `<div style="margin:16px 0 12px;padding-left:12px;">
-                <span style="font-size:16px;font-weight:700;color:#374151;border-left:3px solid #3b82f6;padding-left:8px;">${grade}</span>
-                <span style="font-size:12px;color:#9ca3af;margin-left:8px;">${gradeItems.length}份</span>
-            </div>`;
-
-            // 按册次分组
-            volumeOrder.forEach(volume => {
-                const volumeItems = gradeItems.filter(m => m.volume === volume);
-                if (volumeItems.length === 0) return;
-
-                html += `<div style="margin:12px 0 8px;padding-left:24px;">
-                    <span style="font-size:14px;font-weight:600;color:#6b7280;">📖 ${volume}</span>
-                    <span style="font-size:11px;color:#9ca3af;margin-left:6px;">${volumeItems.length}份</span>
-                </div>`;
-
-                // 按种类分组
-                typeOrder.forEach(type => {
-                    const typeItems = volumeItems.filter(m => m.type === type);
-                    if (typeItems.length === 0) return;
-
-                    html += `<div style="margin:8px 0 6px;padding-left:36px;">
-                        <span style="font-size:13px;font-weight:500;color:#9ca3af;">${type}</span>
-                    </div>`;
-                    html += `<div class="material-grid" style="margin-bottom:16px;">`;
-
-                    typeItems.forEach(m => {
-                        const filePath = `materials/${m.subject}/${m.grade}/${m.volume}/${m.type}/${m.file}`;
-                        // 实际文件路径还是原来的分类路径
-                        const actualPath = getActualPath(m);
-                        const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
-                        const isXhsDup = m.name === "2026年陕西省中考数学试题";
-                        const xhsBtn = isXhsDup ? `<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>` : "";
-                        html += `
-                        <div class="material-card">
-                            <div class="material-icon">${m.icon}</div>
-                            <div class="material-info">
-                                <div class="material-name">${m.name}</div>
-                                <div class="material-meta">${m.size || ""}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
-                            </div>
-                            <div class="material-actions">
-                                ${xhsBtn}
-                                <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
-                                <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
-                            </div>
-                        </div>`;
-                    });
-
-                    html += `</div>`;
-                });
-            });
-        });
-
-        html += `</div>`;
+    
+    // 获取筛选条件
+    const subject = document.getElementById("filterSubject").value;
+    const grade = document.getElementById("filterGrade").value;
+    const volume = document.getElementById("filterVolume").value;
+    const type = document.getElementById("filterType").value;
+    
+    // 筛选资料
+    let filtered = materials.filter(m => {
+        if (subject && m.subject !== subject) return false;
+        if (grade && m.grade !== grade) return false;
+        if (volume && m.volume !== volume) return false;
+        if (type && m.type !== type) return false;
+        if (keyword && !m.name.toLowerCase().includes(keyword) && 
+            !m.type.toLowerCase().includes(keyword) && 
+            !m.grade.toLowerCase().includes(keyword) &&
+            !m.subject.toLowerCase().includes(keyword)) return false;
+        return true;
     });
-
-    if (!html) {
-        html = `<div style="text-align:center;padding:40px;color:var(--text-muted);">没有找到匹配的资料</div>`;
+    
+    // 显示筛选结果数量
+    const resultEl = document.getElementById("filterResult");
+    if (resultEl) {
+        const conditions = [];
+        if (subject) conditions.push(subject);
+        if (grade) conditions.push(grade);
+        if (volume) conditions.push(volume);
+        if (type) conditions.push(type);
+        if (keyword) conditions.push('关键词:"' + keyword + '"');
+        resultEl.textContent = conditions.length > 0 
+            ? '筛选条件：' + conditions.join(' · ') + '，共找到 ' + filtered.length + ' 份资料'
+            : '共 ' + filtered.length + ' 份资料，使用上方筛选器或搜索框快速查找';
     }
+    
+    // 平铺显示资料
+    let html = '';
+    if (filtered.length > 0) {
+        html += '<div class="material-grid">';
+        filtered.forEach(m => {
+            const actualPath = getActualPath(m);
+            const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
+            const isXhsDup = m.name === "2026年陕西省中考数学试题";
+            const xhsBtn = isXhsDup ? '<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>' : '';
+            html += `
+            <div class="material-card">
+                <div class="material-icon">${m.icon}</div>
+                <div class="material-info">
+                    <div class="material-name">${m.name}</div>
+                    <div class="material-meta">${m.subject} · ${m.grade} · ${m.volume} · ${m.type} · ${m.size || ""}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
+                </div>
+                <div class="material-actions">
+                    ${xhsBtn}
+                    <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
+                    <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
+                </div>
+            </div>`;
+        });
+        html += '</div>';
+    } else {
+        html = '<div style="text-align:center;padding:60px 20px;color:#9ca3af;"><div style="font-size:48px;margin-bottom:16px;">🔍</div><div style="font-size:16px;">没有找到匹配的资料</div><div style="font-size:13px;margin-top:8px;">试试调整筛选条件或搜索关键词</div></div>';
+    }
+    
     container.innerHTML = html;
+}
+
+// 重置筛选器
+function resetFilters() {
+    document.getElementById("filterSubject").value = "";
+    document.getElementById("filterGrade").value = "";
+    document.getElementById("filterVolume").value = "";
+    document.getElementById("filterType").value = "";
+    document.getElementById("materialSearch").value = "";
+    filterMaterials();
 }
 
 // 获取实际文件路径（兼容旧的分类目录结构）
