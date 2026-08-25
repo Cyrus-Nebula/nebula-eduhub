@@ -1095,3 +1095,92 @@ footer {
   .about-content { padding: 24px 20px; }
   .footer-inner { flex-direction: column; text-align: center; }
 }
+
+/* ===== 四栏页脚样式 ===== */
+.footer-new {
+    background: #1f2937;
+    color: #9ca3af;
+    padding: 48px 0 24px;
+    margin-top: 60px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+}
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f3f4f6;
+}
+.footer-brand .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+}
+.footer-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #9ca3af;
+    margin: 0;
+}
+.footer-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f3f4f6;
+    margin-bottom: 16px;
+}
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-list li {
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+.footer-list a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-list a:hover {
+    color: #60a5fa;
+}
+.footer-bottom {
+    border-top: 1px solid #374151;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+}
+.footer-bottom p {
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+@media (max-width: 480px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
