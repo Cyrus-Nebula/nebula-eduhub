@@ -69,14 +69,9 @@ a:hover { text-decoration: underline; }
 .logo-icon {
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, var(--primary), #7c3aed);
   border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
+  object-fit: cover;
+  display: block;
 }
 .logo-text span { color: var(--primary); }
 .nav-links {
@@ -1125,14 +1120,9 @@ footer {
 .footer-brand .logo-icon {
     width: 36px;
     height: 36px;
-    background: #2563eb;
-    color: white;
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
+    object-fit: cover;
+    display: block;
 }
 .footer-brand span span {
     color: var(--primary);
