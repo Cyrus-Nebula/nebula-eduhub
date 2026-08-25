@@ -187,17 +187,18 @@
 <section class="section" style="padding-top:10px;">
     <div class="container">
 
-        <div class="empty-note">
-            <h4>📌 大文件需联系微信获取</h4>
-            <p>部分大文件（数学课本、全品作业本合订本等）超过25MB，无法直接放在网站上。需要的同学加微信 <strong>17795600558</strong> 联系获取。</p>
-        </div>
+        <div id="materialsContainer"></div>
 
         <!-- 小红书精选笔记 -->
         <div class="category-section">
             <div class="category-title">📕 小红书精选笔记<span class="count" id="xhsCount">17份</span></div>
             <div class="material-grid" id="xhsContainer"></div>
         </div>
-        <div id="materialsContainer"></div>
+
+        <div class="empty-note">
+            <h4>📌 大文件需联系微信获取</h4>
+            <p>部分大文件（数学课本、全品作业本合订本等）超过25MB，无法直接放在网站上。需要的同学加微信 <strong>17795600558</strong> 联系获取。</p>
+        </div>
 
     </div>
 </section>
@@ -561,6 +562,13 @@ function filterMaterials() {
     const kw = document.getElementById("materialSearch").value;
     renderXhsNotes(kw);
     renderMaterials(kw);
+    // 筛选后自动滚动到结果位置
+    setTimeout(() => {
+        const container = document.getElementById("materialsContainer");
+        if (container) {
+            container.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }, 100);
 }
 
 renderXhsNotes();
