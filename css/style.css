@@ -143,6 +143,10 @@ a:hover { text-decoration: underline; }
 .hero {
   padding: 70px 0 50px;
   text-align: center;
+  background-image: url('images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .hero-badge {
   display: inline-flex;
