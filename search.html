@@ -442,7 +442,6 @@ function renderMaterials(filter = "") {
         items.forEach(m => {
             const filePath = `materials/${m.category}/${m.file}`;
             const encodedPath = encodeURIComponent(filePath).replace(/%2F/g, '/');
-            html += `
             const isXhsDup = m.name === "2026年陕西省中考数学试题";
             const xhsBtn = isXhsDup ? `<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>` : "";
             html += `
