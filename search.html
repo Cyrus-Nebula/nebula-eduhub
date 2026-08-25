@@ -443,13 +443,17 @@ function renderMaterials(filter = "") {
             const filePath = `materials/${m.category}/${m.file}`;
             const encodedPath = encodeURIComponent(filePath).replace(/%2F/g, '/');
             html += `
+            const isXhsDup = m.name === "2026年陕西省中考数学试题";
+            const xhsBtn = isXhsDup ? `<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>` : "";
+            html += `
             <div class="material-card">
                 <div class="material-icon">${m.icon}</div>
                 <div class="material-info">
                     <div class="material-name">${m.name}</div>
-                    <div class="material-meta">${m.size || ""}</div>
+                    <div class="material-meta">${m.size || ""}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
                 </div>
                 <div class="material-actions">
+                    ${xhsBtn}
                     <a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>
                     <a href="${encodedPath}" download class="material-btn btn-download">下载</a>
                 </div>
