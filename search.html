@@ -283,7 +283,7 @@
             </div>
             <div class="footer-col">
                 <h4 class="footer-title">资源链接</h4>
-                <ul class="footer-list"
+                <ul class="footer-list">
                     <li><a href="search.html">资料汇总</a></li>
                     <li><a href="packages.html">网校通服务</a></li>
                     <li><a href="tools.html">下载工具</a></li>
@@ -711,13 +711,14 @@ function renderMaterials(filter = "") {
     container.innerHTML = html;
 }
 
-// 渲染最新资料（从最新上传的20个里随机抽8个）
+// 渲染最新资料（最新上传的排第一，再从最新20个里随机抽7个）
 function renderLatestMaterials() {
     const container = document.getElementById("latestContainer");
     if (!container) return;
-    const latestPool = materials.slice(-20);
+    const newest = materials[materials.length - 1];
+    const latestPool = materials.slice(-20, -1);
     const shuffled = latestPool.sort(() => Math.random() - 0.5);
-    const latest = shuffled.slice(0, 8);
+    const latest = [newest, ...shuffled.slice(0, 7)];
     let html = '<div class="material-grid">';
     latest.forEach(m => {
         const isXhsDup = m.name === "2026年陕西省中考数学试题";
