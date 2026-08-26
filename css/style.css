@@ -1202,3 +1202,11 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* 页脚联系图标 */
+.footer-icon {
+    color: var(--accent);
+    margin-right: 6px;
+    width: 14px;
+    text-align: center;
+}
