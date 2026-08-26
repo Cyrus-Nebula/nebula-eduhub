@@ -619,6 +619,17 @@ function renderMaterials(filter = "") {
     const type = document.getElementById("filterType").value;
     const version = document.getElementById("filterVersion").value;
     
+    // 无任何筛选条件时不展示全部资料列表
+    const hasFilter = keyword || subject || grade || volume || type || version;
+    if (!hasFilter) {
+        container.innerHTML = '';
+        const resultEl = document.getElementById("filterResult");
+        if (resultEl) {
+            resultEl.textContent = '共 ' + materials.length + ' 份资料，使用上方筛选器或搜索框快速查找';
+        }
+        return;
+    }
+    
     // 筛选资料
     let filtered = materials.filter(m => {
         if (subject && m.subject !== subject) return false;
@@ -696,11 +707,12 @@ function renderMaterials(filter = "") {
     container.innerHTML = html;
 }
 
-// 渲染最新资料（取最后添加的8个）
+// 渲染最新资料（随机抽取8个）
 function renderLatestMaterials() {
     const container = document.getElementById("latestContainer");
     if (!container) return;
-    const latest = materials.slice(-8).reverse();
+    const shuffled = [...materials].sort(() => Math.random() - 0.5);
+    const latest = shuffled.slice(0, 8);
     let html = '<div class="material-grid">';
     latest.forEach(m => {
         const isXhsDup = m.name === "2026年陕西省中考数学试题";
