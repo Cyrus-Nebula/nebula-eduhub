@@ -160,8 +160,8 @@
 <div class="container">
     <div class="search-hero">
         <div class="search-input-wrap">
-            <input type="text" id="materialSearch" placeholder="搜索资料名称，比如「二次函数」「全品」「八下」…" onkeydown="if(event.key==='Enter')filterMaterials()">
-            <button type="button" onclick="filterMaterials()" style="padding:10px 24px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">搜索</button>
+            <input type="text" id="materialSearch" placeholder="搜索资料名称，比如「二次函数」「全品」「八下」…" onkeydown="if(event.key==='Enter')doFilter()">
+            <button type="button" onclick="doFilter()" style="padding:10px 24px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">搜索</button>
         </div>
         <div class="filter-bar" style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;justify-content:center;">
             <select id="filterSubject" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
@@ -223,8 +223,8 @@
                 <option value="试卷">试卷</option>
                 <option value="专题训练">专题训练</option>
             </select>
-            <button onclick="filterMaterials()" style="padding:10px 18px;border:1px solid #2563eb;border-radius:8px;font-size:14px;background:#2563eb;cursor:pointer;color:white;font-weight:600;">确认</button>
-            <button onclick="resetFilters()" style="padding:10px 18px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:#f9fafb;cursor:pointer;color:#6b7280;">重置</button>
+            <button onclick="doFilter()" style="padding:10px 18px;border:1px solid #2563eb;border-radius:8px;font-size:14px;background:#2563eb;cursor:pointer;color:white;font-weight:600;">确认</button>
+            <button onclick="resetFilter()" style="padding:10px 18px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:#f9fafb;cursor:pointer;color:#6b7280;">重置</button>
         </div>
         <div id="filterResult" style="text-align:center;margin-top:12px;font-size:13px;color:#9ca3af;"></div>
     </div>
@@ -249,7 +249,7 @@
 
         <!-- 全部资料展开按钮 -->
         <div id="toggleAllWrap" style="text-align:center;margin:30px 0;">
-            <button id="toggleAllBtn" onclick="toggleAllMaterials()" style="padding:12px 32px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;">显示所有资料</button>
+            <button id="toggleAllBtn" onclick="toggleAll()" style="padding:12px 32px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;">显示所有资料</button>
         </div>
         <!-- 筛选/搜索结果 & 展开全部资料 -->
         <div id="materialsContainer"></div>
@@ -310,8 +310,7 @@
 <script src="js/main.js"></script>
 <script>
 const materials = [
-    // ===== 语文（统编版）=====
-    // ===== 七年级上册（新版·外部链接，共34本）=====
+
     { name: "历史七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673718&sign=e83f93&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "历史", grade: "七年级", volume: "上册", type: "电子教材", icon: "📕", edition: "新版", version: "统编版", tagColor: "red" },
     { name: "道德与法治七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673713&sign=eec310&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "道德与法治", grade: "七年级", volume: "上册", type: "电子教材", icon: "📕", edition: "新版", version: "统编版", tagColor: "red" },
     { name: "地理七年级上册（中图版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673711&sign=1fff3e&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子教材", icon: "🌍", edition: "新版", version: "中图版", tagColor: "green" },
@@ -352,26 +351,22 @@ const materials = [
     { name: "语文九年级上册（统编版·旧版）", file: "语文九年级上册 统编版.pdf", subject: "语文", grade: "九年级", volume: "上册", type: "电子教材", size: "5.7MB", icon: "📕", edition: "旧版" },
     { name: "语文九年级下册（统编版·旧版）", file: "语文九年级下册 统编版.pdf", subject: "语文", grade: "九年级", volume: "下册", type: "电子教材", size: "8.0MB", icon: "📕", edition: "旧版" },
 
-    // ===== 数学（人教版）=====
     { name: "数学七年级下册（人教版·新版）", file: "数学七年级下册 人教版.pdf", subject: "数学", grade: "七年级", volume: "下册", type: "电子教材", size: "23MB", icon: "📐", edition: "新版" },
     { name: "数学八年级上册（人教版·新版）", file: "数学八年级上册 人教版.pdf", subject: "数学", grade: "八年级", volume: "上册", type: "电子教材", size: "6.4MB", icon: "📐", edition: "新版" },
     { name: "数学八年级下册（人教版·新版）", file: "数学八年级下册 人教版.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "电子教材", size: "15MB", icon: "📐", edition: "新版" },
     { name: "数学九年级上册（人教版·旧版）", file: "数学九年级上册 人教版.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "电子教材", size: "6.8MB", icon: "📐", edition: "旧版" },
     { name: "数学九年级下册（人教版·旧版）", file: "数学九年级下册 人教版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子教材", size: "8.1MB", icon: "📐", edition: "旧版" },
 
-    // ===== 数学（北师大版）=====
     { name: "数学七年级下册（北师大版·新版）", file: "数学七年级下册 北师大版.pdf", subject: "数学", grade: "七年级", volume: "下册", type: "电子教材", size: "22MB", icon: "📐", edition: "新版" },
     { name: "数学八年级上册（北师大版·新版）", file: "数学八年级上册 北师大版.pdf", subject: "数学", grade: "八年级", volume: "上册", type: "电子教材", size: "11MB", icon: "📐", edition: "新版" },
     { name: "数学八年级下册（北师大版·新版）", file: "数学八年级下册  北师大版.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "电子教材", size: "22MB", icon: "📐", edition: "新版" },
     { name: "数学九年级上册（北师大版·新版）", file: "数学九年级上册 北师大版.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "电子教材", size: "23MB", icon: "📐", edition: "新版" },
     { name: "数学九年级下册（北师大版·新版）", file: "数学九年级下册 北师大版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子教材", size: "16MB", icon: "📐", edition: "新版" },
 
-    // ===== 英语（人教版）=====
     { name: "英语八年级上册（人教版·旧版）", file: "英语八年级上册 人教版.pdf", subject: "英语", grade: "八年级", volume: "上册", type: "电子教材", size: "5.0MB", icon: "📘", edition: "旧版" },
     { name: "英语八年级下册（人教版·旧版）", file: "英语八年级下册 人教版.pdf", subject: "英语", grade: "八年级", volume: "下册", type: "电子教材", size: "6.6MB", icon: "📗", edition: "旧版" },
     { name: "英语九年级全一册（人教版·旧版）", file: "英语九年级全一册 人教版.pdf", subject: "英语", grade: "九年级", volume: "全一册", type: "电子教材", size: "11MB", icon: "📘", edition: "旧版" },
 
-    // ===== 数学 - 九年级 =====
     { name: "全品作业本九上数学 第一章 特殊平行四边形", file: "全品作业本九上数学_第一章特殊平行四边形.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "8.6MB", icon: "📐" },
     { name: "全品作业本九上数学 第二章 一元二次方程", file: "全品作业本九上数学_第二章一元二次方程.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "7.8MB", icon: "📐" },
     { name: "全品作业本九上数学 第三章 概率的进一步认识", file: "全品作业本九上数学_第三章概率的进一步认识.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "9.5MB", icon: "📐" },
@@ -379,7 +374,6 @@ const materials = [
     { name: "全品作业本九上数学 第五章 投影与视图", file: "全品作业本九上数学_第五章投影与视图.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "13MB", icon: "📐" },
     { name: "全品作业本九上数学 第六章 反比例函数", file: "全品作业本九上数学_第六章反比例函数.pdf", subject: "数学", grade: "九年级", volume: "上册", type: "全品作业本", size: "4.4MB", icon: "📐" },
 
-    // ===== 数学 - 八年级 =====
     { name: "全品作业本八下数学 第二章 一元一次不等式", file: "全品作业本八下数学_第二章一元一次不等式.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "6.4MB", icon: "📐" },
     { name: "全品作业本八下数学 第四章 因式分解", file: "全品作业本八下数学_第四章因式分解.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "2.7MB", icon: "📐" },
     { name: "全品作业本八下数学 第五章 分式与分式方程", file: "全品作业本八下数学_第五章分式与分式方程.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "全品作业本", size: "6.0MB", icon: "📐" },
@@ -413,12 +407,10 @@ const materials = [
     { name: "莲湖区2022-2023八下期末数学试题", file: "莲湖区2022-2023八下期末数学试题.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.3MB", icon: "📝" },
     { name: "八年级数学期末模拟卷", file: "八年级数学期末模拟卷.pdf", subject: "数学", grade: "八年级", volume: "下册", type: "试卷", size: "1.6MB", icon: "📝" },
 
-    // ===== 数学 - 七年级 =====
     { name: "七上数学 一元一次方程测试", file: "七上数学_一元一次方程测试.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "1.1MB", icon: "📝" },
     { name: "七上数学 12月4日测试题", file: "七上数学_12月4日测试题.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "0.7MB", icon: "📝" },
     { name: "七上数学 12月18日测试卷", file: "七上数学_12月18日测试卷.pdf", subject: "数学", grade: "七年级", volume: "上册", type: "试卷", size: "1.8MB", icon: "📝" },
 
-    // ===== 数学 - 中考 =====
     { name: "二次函数专题1 求目标点横纵比大小", file: "二次函数专题1_求目标点横纵比大小.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "4.0MB", icon: "🎯" },
     { name: "二次函数专题2 平移二次函数", file: "二次函数专题2_平移二次函数.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "3.9MB", icon: "🎯" },
     { name: "二次函数专题3 配方法求最值", file: "二次函数专题3_配方法求最值.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "1.2MB", icon: "🎯" },
@@ -437,7 +429,6 @@ const materials = [
     { name: "韦达定理专练", file: "韦达定理专练.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "专题训练", size: "0.2MB", icon: "🎯" },
     { name: "2026年陕西省中考数学试题", file: "2026年陕西省中考数学试题.pdf", subject: "数学", grade: "中考", volume: "全一册", type: "试卷", size: "1.2MB", icon: "📝" },
 
-    // ===== 高中数学 =====
     { name: "高中数学A版 必修第一册", file: "高中数学A版_数学 必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "电子教材", size: "22MB", icon: "📕" },
     { name: "高中数学A版 必修第二册", file: "高中数学A版_数学 必修 第二册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "电子教材", size: "16MB", icon: "📕" },
     { name: "高中数学A版 选择性必修第一册", file: "高中数学A版_数学 选择性必修 第一册（A版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "电子教材", size: "20MB", icon: "📕" },
@@ -453,16 +444,6 @@ const materials = [
     { name: "数学九年级下册（北师大版·新版）", downloadUrl: "https://github.com/Cyrus-Nebula/nebula-eduhub/releases/download/materials/2024.pdf", previewFile: "数学九年级下册（北师大版·2024新版）_预览版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子教材", size: "47MB", icon: "📐", edition: "新版", version: "北师大版", tagColor: "green" },
 ];
 
-// 分类顺序
-const subjectOrder = ["语文", "数学", "英语", "高中数学"];
-const gradeOrder = ["七年级", "八年级", "九年级", "中考", "高中"];
-const volumeOrder = ["上册", "下册", "全一册"];
-const typeOrder = ["电子课本", "全品作业本", "试卷", "专题训练", "教材"];
-const subjectIcons = {
-    "语文": "📕", "数学": "🔢", "英语": "🔤", "高中数学": "📐"
-};
-
-// 小红书精选笔记数据
 const xhsNotes = [
     {
         "index": 1,
@@ -585,16 +566,15 @@ const xhsNotes = [
     }
 ];
 
-// 渲染小红书笔记
-function renderXhsNotes(filter = "") {
-    const container = document.getElementById("xhsContainer");
-    const keyword = filter.toLowerCase().trim();
+function loadXhs(filter = "") {
+    let box = document.getElementById("xhsContainer");
+    let kw = filter.toLowerCase().trim();
     let html = "";
-    const filtered = xhsNotes.filter(n => 
-        !keyword || n.title.toLowerCase().includes(keyword) || n.desc.toLowerCase().includes(keyword)
+    let list = xhsNotes.filter(n => 
+        !kw || n.title.toLowerCase().includes(kw) || n.desc.toLowerCase().includes(kw)
     );
-    filtered.forEach(n => {
-        const desc = n.desc ? n.desc.substring(0, 60) + (n.desc.length > 60 ? "..." : "") : "点击查看小红书笔记详情";
+    list.forEach(n => {
+        let desc = n.desc ? n.desc.substring(0, 60) + (n.desc.length > 60 ? "..." : "") : "点击查看小红书笔记详情";
         html += `
         <div class="material-card">
             <div class="material-icon" style="background:#fce7f3;">📕</div>
@@ -608,106 +588,96 @@ function renderXhsNotes(filter = "") {
             </div>
         </div>`;
     });
-    if (!html && keyword) {
+    if (!html && kw) {
         html = `<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text-muted);">没有找到匹配的笔记</div>`;
     }
-    container.innerHTML = html;
+    box.innerHTML = html;
 }
 
-function renderMaterials(filter = "") {
-    const container = document.getElementById("materialsContainer");
-    const keyword = filter.toLowerCase().trim();
+function loadList(filter = "") {
+    let box = document.getElementById("materialsContainer");
+    let kw = filter.toLowerCase().trim();
     
-    // 获取筛选条件
-    const subject = document.getElementById("filterSubject").value;
-    const grade = document.getElementById("filterGrade").value;
-    const volume = document.getElementById("filterVolume").value;
-    const type = document.getElementById("filterType").value;
-    const version = document.getElementById("filterVersion").value;
+    let subject = document.getElementById("filterSubject").value;
+    let grade = document.getElementById("filterGrade").value;
+    let volume = document.getElementById("filterVolume").value;
+    let type = document.getElementById("filterType").value;
+    let version = document.getElementById("filterVersion").value;
     
-    // 无任何筛选条件且未展开全部时不展示资料列表
-    const hasFilter = keyword || subject || grade || volume || type || version;
-    if (!hasFilter && !showAllMaterials) {
-        container.innerHTML = '';
-        const resultEl = document.getElementById("filterResult");
-        if (resultEl) {
-            resultEl.textContent = '共 ' + materials.length + ' 份资料，使用上方筛选器或搜索框快速查找';
-        }
+    let hasF = kw || subject || grade || volume || type || version;
+    if (!hasF && !showAll) {
+        box.innerHTML = '';
+        let r = document.getElementById("filterResult");
+        if (r) r.textContent = '共 ' + materials.length + ' 份资料，使用上方筛选器或搜索框快速查找';
         return;
     }
     
-    // 筛选资料
-    let filtered = materials.filter(m => {
+    let list = materials.filter(m => {
         if (subject && m.subject !== subject) return false;
         if (grade && m.grade !== grade) return false;
         if (volume && m.volume !== volume) return false;
         if (type && m.type !== type) return false;
         if (version && m.version !== version) return false;
-        if (keyword && !m.name.toLowerCase().includes(keyword) && 
-            !m.type.toLowerCase().includes(keyword) && 
-            !m.grade.toLowerCase().includes(keyword) &&
-            !m.subject.toLowerCase().includes(keyword)) return false;
+        if (kw && !m.name.toLowerCase().includes(kw) && 
+            !m.type.toLowerCase().includes(kw) && 
+            !m.grade.toLowerCase().includes(kw) &&
+            !m.subject.toLowerCase().includes(kw)) return false;
         return true;
     });
     
-    // 显示筛选结果数量
-    const resultEl = document.getElementById("filterResult");
-    if (resultEl) {
-        const conditions = [];
-        if (subject) conditions.push(subject);
-        if (grade) conditions.push(grade);
-        if (volume) conditions.push(volume);
-        if (type) conditions.push(type);
-        if (version) conditions.push(version);
-        if (keyword) conditions.push('关键词:"' + keyword + '"');
-        resultEl.textContent = conditions.length > 0 
-            ? '筛选条件：' + conditions.join(' · ') + '，共找到 ' + filtered.length + ' 份资料'
-            : '共 ' + filtered.length + ' 份资料，使用上方筛选器或搜索框快速查找';
+    let r = document.getElementById("filterResult");
+    if (r) {
+        let cond = [];
+        if (subject) cond.push(subject);
+        if (grade) cond.push(grade);
+        if (volume) cond.push(volume);
+        if (type) cond.push(type);
+        if (version) cond.push(version);
+        if (kw) cond.push('关键词:"' + kw + '"');
+        r.textContent = cond.length > 0 
+            ? '筛选条件：' + cond.join(' · ') + '，共找到 ' + list.length + ' 份资料'
+            : '共 ' + list.length + ' 份资料，使用上方筛选器或搜索框快速查找';
     }
     
-    // 平铺显示资料
     let html = '';
-    if (filtered.length > 0) {
+    if (list.length > 0) {
         html += '<div class="material-grid">';
-        filtered.forEach(m => {
-            const isXhsDup = m.name === "2026年陕西省中考数学试题";
-            const xhsBtn = isXhsDup ? '<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>' : '';
+        list.forEach(m => {
+            let isXhs = m.name === "2026年陕西省中考数学试题";
+            let xhsBtn = isXhs ? '<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>' : '';
             
             let previewBtn = '';
             let downloadBtn = '';
-            let tagBadge = '';
+            let tag = '';
             
             if (m.downloadUrl) {
                 downloadBtn = `<a href="${m.downloadUrl}" target="_blank" class="material-btn btn-download">下载</a>`;
                 if (m.previewFile) {
-                    const previewPath = getActualPath({ ...m, file: m.previewFile });
-                    const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
-                    previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                    let pp = pathOf({ ...m, file: m.previewFile });
+                    let ep = encodeURIComponent(pp).replace(/%2F/g, '/');
+                    previewBtn = `<a href="${ep}" target="_blank" class="material-btn btn-preview">预览</a>`;
                 }
-                if (m.tagColor === 'red') {
-                    tagBadge = '<img src="images/textbook_tag_red.png" class="textbook-tag" alt="国家教材委员会审核通过2024">';
-                } else if (m.tagColor === 'green') {
-                    tagBadge = '<img src="images/textbook_tag_green.png" class="textbook-tag" alt="国家教材委员会专家委员会审核通过2024">';
-                }
+                if (m.tagColor === 'red') tag = '<img src="images/textbook_tag_red.png" class="textbook-tag" alt="">';
+                else if (m.tagColor === 'green') tag = '<img src="images/textbook_tag_green.png" class="textbook-tag" alt="">';
             } else {
-                const actualPath = getActualPath(m);
-                const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
+                let p = pathOf(m);
+                let enc = encodeURIComponent(p).replace(/%2F/g, '/');
                 if (m.previewFile) {
-                    const previewPath = getActualPath({ ...m, file: m.previewFile });
-                    const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
-                    previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                    let pp = pathOf({ ...m, file: m.previewFile });
+                    let ep = encodeURIComponent(pp).replace(/%2F/g, '/');
+                    previewBtn = `<a href="${ep}" target="_blank" class="material-btn btn-preview">预览</a>`;
                 } else {
-                    previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                    previewBtn = `<a href="${enc}" target="_blank" class="material-btn btn-preview">预览</a>`;
                 }
-                downloadBtn = `<a href="${encodedPath}" download class="material-btn btn-download">下载</a>`;
+                downloadBtn = `<a href="${enc}" download class="material-btn btn-download">下载</a>`;
             }
             
             html += `
             <div class="material-card">
                 <div class="material-icon">${m.icon}</div>
                 <div class="material-info">
-                    <div class="material-name">${m.name}${tagBadge}</div>
-                    <div class="material-meta">${m.subject} · ${m.grade} · ${m.volume} · ${m.type}${m.size ? ' · ' + m.size : ''}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
+                    <div class="material-name">${m.name}${tag}</div>
+                    <div class="material-meta">${m.subject} · ${m.grade} · ${m.volume} · ${m.type}${m.size ? ' · ' + m.size : ''}${isXhs ? ' · 小红书同步更新' : ''}</div>
                 </div>
                 <div class="material-actions">
                     ${xhsBtn}
@@ -721,54 +691,50 @@ function renderMaterials(filter = "") {
         html = '<div style="text-align:center;padding:60px 20px;color:#9ca3af;"><div style="font-size:48px;margin-bottom:16px;">🔍</div><div style="font-size:16px;">没有找到匹配的资料</div><div style="font-size:13px;margin-top:8px;">试试调整筛选条件或搜索关键词</div></div>';
     }
     
-    container.innerHTML = html;
+    box.innerHTML = html;
 }
 
-// 渲染最新资料（最新上传的排第一，再从最新20个里随机抽7个）
-function renderLatestMaterials() {
-    const container = document.getElementById("latestContainer");
-    if (!container) return;
-    const newest = materials[materials.length - 1];
-    const latestPool = materials.slice(-20, -1);
-    const shuffled = latestPool.sort(() => Math.random() - 0.5);
-    const latest = [newest, ...shuffled.slice(0, 7)];
+function loadNewest() {
+    let box = document.getElementById("latestContainer");
+    if (!box) return;
+    let newest = materials[materials.length - 1];
+    let pool = materials.slice(-20, -1);
+    pool.sort(() => Math.random() - 0.5);
+    let list = [newest].concat(pool.slice(0, 7));
     let html = '<div class="material-grid">';
-    latest.forEach(m => {
-        const isXhsDup = m.name === "2026年陕西省中考数学试题";
-        const xhsBtn = isXhsDup ? '<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>' : '';
+    list.forEach(m => {
+        let isXhs = m.name === "2026年陕西省中考数学试题";
+        let xhsBtn = isXhs ? '<a href="https://xhslink.cn/o/3DAHQDqtNqr" target="_blank" class="material-btn btn-preview" style="background:#fce7f3;color:#be185d;">小红书</a>' : '';
         let previewBtn = '';
         let downloadBtn = '';
-        let tagBadge = '';
+        let tag = '';
         if (m.downloadUrl) {
             downloadBtn = `<a href="${m.downloadUrl}" target="_blank" class="material-btn btn-download">下载</a>`;
             if (m.previewFile) {
-                const previewPath = getActualPath({ ...m, file: m.previewFile });
-                const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
-                previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                let pp = pathOf({ ...m, file: m.previewFile });
+                let ep = encodeURIComponent(pp).replace(/%2F/g, '/');
+                previewBtn = `<a href="${ep}" target="_blank" class="material-btn btn-preview">预览</a>`;
             }
-            if (m.tagColor === 'red') {
-                tagBadge = '<img src="images/textbook_tag_red.png" class="textbook-tag" alt="国家教材委员会审核通过2024">';
-            } else if (m.tagColor === 'green') {
-                tagBadge = '<img src="images/textbook_tag_green.png" class="textbook-tag" alt="国家教材委员会专家委员会审核通过2024">';
-            }
+            if (m.tagColor === 'red') tag = '<img src="images/textbook_tag_red.png" class="textbook-tag" alt="">';
+            else if (m.tagColor === 'green') tag = '<img src="images/textbook_tag_green.png" class="textbook-tag" alt="">';
         } else {
-            const actualPath = getActualPath(m);
-            const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
+            let p = pathOf(m);
+            let enc = encodeURIComponent(p).replace(/%2F/g, '/');
             if (m.previewFile) {
-                const previewPath = getActualPath({ ...m, file: m.previewFile });
-                const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
-                previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                let pp = pathOf({ ...m, file: m.previewFile });
+                let ep = encodeURIComponent(pp).replace(/%2F/g, '/');
+                previewBtn = `<a href="${ep}" target="_blank" class="material-btn btn-preview">预览</a>`;
             } else {
-                previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                previewBtn = `<a href="${enc}" target="_blank" class="material-btn btn-preview">预览</a>`;
             }
-            downloadBtn = `<a href="${encodedPath}" download class="material-btn btn-download">下载</a>`;
+            downloadBtn = `<a href="${enc}" download class="material-btn btn-download">下载</a>`;
         }
         html += `
         <div class="material-card">
             <div class="material-icon">${m.icon}</div>
             <div class="material-info">
-                <div class="material-name">${m.name}${tagBadge}</div>
-                <div class="material-meta">${m.subject} · ${m.grade} · ${m.volume} · ${m.type}${m.size ? ' · ' + m.size : ''}${isXhsDup ? ' · 小红书同步更新' : ''}</div>
+                <div class="material-name">${m.name}${tag}</div>
+                <div class="material-meta">${m.subject} · ${m.grade} · ${m.volume} · ${m.type}${m.size ? ' · ' + m.size : ''}${isXhs ? ' · 小红书同步更新' : ''}</div>
             </div>
             <div class="material-actions">
                 ${xhsBtn}
@@ -778,80 +744,73 @@ function renderLatestMaterials() {
         </div>`;
     });
     html += '</div>';
-    container.innerHTML = html;
+    box.innerHTML = html;
 }
 
-// 展开/收起全部资料
-let showAllMaterials = false;
-function toggleAllMaterials() {
-    showAllMaterials = !showAllMaterials;
-    const btn = document.getElementById("toggleAllBtn");
-    if (showAllMaterials) {
+let showAll = false;
+function toggleAll() {
+    showAll = !showAll;
+    let btn = document.getElementById("toggleAllBtn");
+    if (showAll) {
         btn.textContent = "收起所有资料";
         btn.style.background = "#6b7280";
     } else {
         btn.textContent = "显示所有资料";
         btn.style.background = "#2563eb";
     }
-    renderMaterials();
-    if (showAllMaterials) {
-        document.getElementById("materialsContainer").scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    loadList();
+    if (showAll) document.getElementById("materialsContainer").scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// 重置筛选器
-function resetFilters() {
+function resetFilter() {
     document.getElementById("filterSubject").value = "";
     document.getElementById("filterGrade").value = "";
     document.getElementById("filterVolume").value = "";
     document.getElementById("filterType").value = "";
     document.getElementById("filterVersion").value = "";
     document.getElementById("materialSearch").value = "";
-    filterMaterials();
+    doFilter();
 }
 
-// 获取实际文件路径（兼容旧的分类目录结构）
-function getActualPath(m) {
+// 目录名和代码里写的不一致，实际叫八下试卷/七上试卷
+function pathOf(m) {
     if (m.type === "电子教材") {
-        if (m.grade === "高中") {
-            return `materials/高中数学/${m.file}`;
-        }
-        const gradeDir = m.grade + m.volume;
-        return `materials/电子课本/初中/${gradeDir}/${m.file}`;
+        if (m.grade === "高中") return `materials/高中数学/${m.file}`;
+        let dir = m.grade + m.volume;
+        return `materials/电子课本/初中/${dir}/${m.file}`;
     }
-    const pathMap = {
+    let map = {
         "全品作业本": "全品作业本",
         "试卷": m.grade === "八年级" ? "八下试卷" : (m.grade === "七年级" ? "七上试卷" : "专题训练"),
         "专题训练": "专题训练"
     };
-    const category = pathMap[m.type] || m.type;
-    return `materials/${category}/${m.file}`;
+    let cat = map[m.type] || m.type;
+    return `materials/${cat}/${m.file}`;
 }
 
-function filterMaterials() {
-    const kw = document.getElementById("materialSearch").value;
-    const subject = document.getElementById("filterSubject").value;
-    const grade = document.getElementById("filterGrade").value;
-    const volume = document.getElementById("filterVolume").value;
-    const type = document.getElementById("filterType").value;
-    const version = document.getElementById("filterVersion").value;
-    const hasFilter = kw.trim() || subject || grade || volume || type || version;
+function doFilter() {
+    let kw = document.getElementById("materialSearch").value;
+    let subject = document.getElementById("filterSubject").value;
+    let grade = document.getElementById("filterGrade").value;
+    let volume = document.getElementById("filterVolume").value;
+    let type = document.getElementById("filterType").value;
+    let version = document.getElementById("filterVersion").value;
+    let hasF = kw.trim() || subject || grade || volume || type || version;
     
-    renderXhsNotes(kw);
-    renderMaterials(kw);
+    loadXhs(kw);
+    loadList(kw);
     
-    // 筛选/搜索时隐藏最新资料、小红书、展开按钮，只显示筛选结果
-    const latestSection = document.getElementById("latestSection");
-    const xhsSection = document.getElementById("xhsSection");
-    const toggleAllWrap = document.getElementById("toggleAllWrap");
-    if (latestSection) latestSection.style.display = hasFilter ? "none" : "";
-    if (xhsSection) xhsSection.style.display = hasFilter ? "none" : "";
-    if (toggleAllWrap) toggleAllWrap.style.display = hasFilter ? "none" : "";
+    let latest = document.getElementById("latestSection");
+    let xhs = document.getElementById("xhsSection");
+    let wrap = document.getElementById("toggleAllWrap");
+    if (latest) latest.style.display = hasF ? "none" : "";
+    if (xhs) xhs.style.display = hasF ? "none" : "";
+    if (wrap) wrap.style.display = hasF ? "none" : "";
 }
 
-renderXhsNotes();
-renderMaterials();
-renderLatestMaterials();
+loadXhs();
+loadList();
+loadNewest();
 </script>
 
 </body>
