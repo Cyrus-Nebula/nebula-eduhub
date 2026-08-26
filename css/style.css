@@ -1108,7 +1108,7 @@ footer {
 }
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 32px;
     margin-bottom: 32px;
 }
