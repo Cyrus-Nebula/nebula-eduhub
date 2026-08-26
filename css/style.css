@@ -1140,6 +1140,7 @@ footer {
     line-height: 1.7;
     color: #9ca3af;
     margin: 0;
+    max-width: 260px
 }
 .footer-title {
     font-size: 15px;
