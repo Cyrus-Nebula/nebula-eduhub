@@ -449,6 +449,7 @@ const materials = [
     { name: "高中数学B版 选择性必修第一册", file: "高中数学B版_数学 选择性必修 第一册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "15MB", icon: "📘" },
     { name: "高中数学B版 选择性必修第二册", file: "高中数学B版_数学 选择性必修 第二册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "21MB", icon: "📘" },
     { name: "高中数学B版 选择性必修第三册", file: "高中数学B版_数学 选择性必修 第三册（B版）.pdf", subject: "高中数学", grade: "高中", volume: "全一册", type: "教材", size: "12MB", icon: "📘" },
+    { name: "数学九年级下册（人教版·2024新版）", file: "数学九年级下册（人教版·2024新版）.pdf", previewFile: "数学九年级下册（人教版·2024新版）_预览版.pdf", subject: "数学", grade: "九年级", volume: "下册", type: "电子课本", size: "47MB", icon: "📐", edition: "新版", version: "人教版" },
 ];
 
 // 分类顺序
@@ -685,7 +686,13 @@ function renderMaterials(filter = "") {
             } else {
                 const actualPath = getActualPath(m);
                 const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
-                previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                if (m.previewFile) {
+                    const previewPath = getActualPath({ ...m, file: m.previewFile });
+                    const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
+                    previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                } else {
+                    previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+                }
                 downloadBtn = `<a href="${encodedPath}" download class="material-btn btn-download">下载</a>`;
             }
             
@@ -736,7 +743,13 @@ function renderLatestMaterials() {
         } else {
             const actualPath = getActualPath(m);
             const encodedPath = encodeURIComponent(actualPath).replace(/%2F/g, '/');
-            previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+            if (m.previewFile) {
+                const previewPath = getActualPath({ ...m, file: m.previewFile });
+                const encodedPreview = encodeURIComponent(previewPath).replace(/%2F/g, '/');
+                previewBtn = `<a href="${encodedPreview}" target="_blank" class="material-btn btn-preview">预览</a>`;
+            } else {
+                previewBtn = `<a href="${encodedPath}" target="_blank" class="material-btn btn-preview">预览</a>`;
+            }
             downloadBtn = `<a href="${encodedPath}" download class="material-btn btn-download">下载</a>`;
         }
         html += `
