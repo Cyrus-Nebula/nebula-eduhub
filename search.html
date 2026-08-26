@@ -175,6 +175,31 @@
                 <option value="道德与法治">道德与法治</option>
                 <option value="高中数学">高中数学</option>
             </select>
+            <select id="filterVersion" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
+                <option value="">全部教材版本</option>
+                <option value="统编版">统编版</option>
+                <option value="人教版">人教版</option>
+                <option value="北师大版">北师大版</option>
+                <option value="苏科版">苏科版</option>
+                <option value="苏教版">苏教版</option>
+                <option value="湘教版">湘教版</option>
+                <option value="冀教版">冀教版</option>
+                <option value="冀少版">冀少版</option>
+                <option value="译林版">译林版</option>
+                <option value="科普版">科普版</option>
+                <option value="中图版">中图版</option>
+                <option value="粤教粤人版">粤教粤人版</option>
+                <option value="商务星球版">商务星球版</option>
+                <option value="晋教版">晋教版</option>
+                <option value="沪外教版">沪外教版</option>
+                <option value="沪教版">沪教版</option>
+                <option value="沪科技版">沪科技版</option>
+                <option value="浙教版">浙教版</option>
+                <option value="青岛版">青岛版</option>
+                <option value="华东师大版">华东师大版</option>
+                <option value="北京版">北京版</option>
+                <option value="济南版">济南版</option>
+            </select>
             <select id="filterGrade" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
                 <option value="">全部年级</option>
                 <option value="七年级">七年级</option>
@@ -196,11 +221,6 @@
                 <option value="试卷">试卷</option>
                 <option value="专题训练">专题训练</option>
                 <option value="教材">教材</option>
-            </select>
-            <select id="filterEdition" style="padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:white;cursor:pointer;min-width:120px;">
-                <option value="">全部版本</option>
-                <option value="新版">新版</option>
-                <option value="旧版">旧版</option>
             </select>
             <button onclick="filterMaterials()" style="padding:10px 18px;border:1px solid #2563eb;border-radius:8px;font-size:14px;background:#2563eb;cursor:pointer;color:white;font-weight:600;">确认</button>
             <button onclick="resetFilters()" style="padding:10px 18px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;background:#f9fafb;cursor:pointer;color:#6b7280;">重置</button>
@@ -280,40 +300,40 @@
 const materials = [
     // ===== 语文（统编版）=====
     // ===== 七年级上册（新版·外部链接，共34本）=====
-    { name: "历史七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673718&sign=e83f93&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "历史", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", tagColor: "red" },
-    { name: "道德与法治七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673713&sign=eec310&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "道德与法治", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", tagColor: "red" },
-    { name: "地理七年级上册（中图版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673711&sign=1fff3e&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（粤教粤人版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673707&sign=69f9bd&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（湘教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673691&sign=eea7e4&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（商务星球版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673645&sign=a89e68&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673638&sign=f76e53&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（科普版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673634&sign=8be02c&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "地理七年级上册（晋教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673629&sign=365e27&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", tagColor: "green" },
-    { name: "语文七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673334&sign=8d9147&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "语文", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", tagColor: "red" },
-    { name: "英语七年级上册（译林版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673333&sign=568ce7&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673293&sign=a47460&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（科普版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673292&sign=2b6ce6&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（冀教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673289&sign=10d01f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（沪外教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673286&sign=d19a0f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（沪教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673284&sign=fe652d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "英语七年级上册（北师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673283&sign=e3ced3&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（浙教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673265&sign=9d587a&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（湘教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673251&sign=135f3d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（苏科版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673241&sign=f9e06d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673197&sign=bc3c14&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（青岛版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673195&sign=c33d7f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（冀教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673152&sign=41adb5&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（华东师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673140&sign=fc9fbf&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（沪科技版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673137&sign=bf3cb1&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（北师版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673072&sign=a4ed55&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "数学七年级上册（北京版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673045&sign=d66f5b&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（苏科版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673040&sign=293d9d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（苏教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673028&sign=51c8ea&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673019&sign=3214b3&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（济南版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672987&sign=fd6100&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（北京版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672985&sign=051f32&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（冀少版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672956&sign=a60562&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
-    { name: "生物学七年级上册（北师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672954&sign=71845b&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", tagColor: "green" },
+    { name: "历史七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673718&sign=e83f93&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "历史", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", version: "统编版", tagColor: "red" },
+    { name: "道德与法治七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673713&sign=eec310&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "道德与法治", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", version: "统编版", tagColor: "red" },
+    { name: "地理七年级上册（中图版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673711&sign=1fff3e&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "中图版", tagColor: "green" },
+    { name: "地理七年级上册（粤教粤人版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673707&sign=69f9bd&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "粤教粤人版", tagColor: "green" },
+    { name: "地理七年级上册（湘教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673691&sign=eea7e4&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "湘教版", tagColor: "green" },
+    { name: "地理七年级上册（商务星球版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673645&sign=a89e68&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "商务星球版", tagColor: "green" },
+    { name: "地理七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673638&sign=f76e53&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "人教版", tagColor: "green" },
+    { name: "地理七年级上册（科普版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673634&sign=8be02c&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "科普版", tagColor: "green" },
+    { name: "地理七年级上册（晋教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673629&sign=365e27&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "地理", grade: "七年级", volume: "上册", type: "电子课本", icon: "🌍", edition: "新版", version: "晋教版", tagColor: "green" },
+    { name: "语文七年级上册（统编版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673334&sign=8d9147&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "语文", grade: "七年级", volume: "上册", type: "电子课本", icon: "📕", edition: "新版", version: "统编版", tagColor: "red" },
+    { name: "英语七年级上册（译林版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673333&sign=568ce7&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "译林版", tagColor: "green" },
+    { name: "英语七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673293&sign=a47460&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "人教版", tagColor: "green" },
+    { name: "英语七年级上册（科普版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673292&sign=2b6ce6&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "科普版", tagColor: "green" },
+    { name: "英语七年级上册（冀教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673289&sign=10d01f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "冀教版", tagColor: "green" },
+    { name: "英语七年级上册（沪外教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673286&sign=d19a0f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "沪外教版", tagColor: "green" },
+    { name: "英语七年级上册（沪教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673284&sign=fe652d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "沪教版", tagColor: "green" },
+    { name: "英语七年级上册（北师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673283&sign=e3ced3&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "英语", grade: "七年级", volume: "上册", type: "电子课本", icon: "📘", edition: "新版", version: "北师大版", tagColor: "green" },
+    { name: "数学七年级上册（浙教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673265&sign=9d587a&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "浙教版", tagColor: "green" },
+    { name: "数学七年级上册（湘教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673251&sign=135f3d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "湘教版", tagColor: "green" },
+    { name: "数学七年级上册（苏科版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673241&sign=f9e06d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "苏科版", tagColor: "green" },
+    { name: "数学七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673197&sign=bc3c14&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "人教版", tagColor: "green" },
+    { name: "数学七年级上册（青岛版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673195&sign=c33d7f&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "青岛版", tagColor: "green" },
+    { name: "数学七年级上册（冀教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673152&sign=41adb5&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "冀教版", tagColor: "green" },
+    { name: "数学七年级上册（华东师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673140&sign=fc9fbf&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "华东师大版", tagColor: "green" },
+    { name: "数学七年级上册（沪科技版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673137&sign=bf3cb1&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "沪科技版", tagColor: "green" },
+    { name: "数学七年级上册（北师版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673072&sign=a4ed55&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "北师大版", tagColor: "green" },
+    { name: "数学七年级上册（北京版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673045&sign=d66f5b&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "数学", grade: "七年级", volume: "上册", type: "电子课本", icon: "📐", edition: "新版", version: "北京版", tagColor: "green" },
+    { name: "生物学七年级上册（苏科版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673040&sign=293d9d&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "苏科版", tagColor: "green" },
+    { name: "生物学七年级上册（苏教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673028&sign=51c8ea&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "苏教版", tagColor: "green" },
+    { name: "生物学七年级上册（人教版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102673019&sign=3214b3&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "人教版", tagColor: "green" },
+    { name: "生物学七年级上册（济南版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672987&sign=fd6100&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "济南版", tagColor: "green" },
+    { name: "生物学七年级上册（北京版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672985&sign=051f32&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "北京版", tagColor: "green" },
+    { name: "生物学七年级上册（冀少版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672956&sign=a60562&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "冀少版", tagColor: "green" },
+    { name: "生物学七年级上册（北师大版·新版）", downloadUrl: "https://mp.zhizhuma.com/qr/doc.htm?resId=102672954&sign=71845b&crId=72756955&bizId=642393&bizType=14&crIdSign=f4d3eb", subject: "生物学", grade: "七年级", volume: "上册", type: "电子课本", icon: "🧬", edition: "新版", version: "北师大版", tagColor: "green" },
     { name: "语文七年级下册（统编版·旧版）", file: "语文七年级下册 统编版.pdf", subject: "语文", grade: "七年级", volume: "下册", type: "电子课本", size: "7.8MB", icon: "📕", edition: "旧版" },
     { name: "语文八年级上册（统编版·旧版）", file: "语文八年级上册 统编版.pdf", subject: "语文", grade: "八年级", volume: "上册", type: "电子课本", size: "7.4MB", icon: "📕", edition: "旧版" },
     { name: "语文八年级下册（统编版·旧版）", file: "语文八年级下册 统编版.pdf", subject: "语文", grade: "八年级", volume: "下册", type: "电子课本", size: "5.5MB", icon: "📕", edition: "旧版" },
@@ -590,7 +610,7 @@ function renderMaterials(filter = "") {
     const grade = document.getElementById("filterGrade").value;
     const volume = document.getElementById("filterVolume").value;
     const type = document.getElementById("filterType").value;
-    const edition = document.getElementById("filterEdition").value;
+    const version = document.getElementById("filterVersion").value;
     
     // 筛选资料
     let filtered = materials.filter(m => {
@@ -598,7 +618,7 @@ function renderMaterials(filter = "") {
         if (grade && m.grade !== grade) return false;
         if (volume && m.volume !== volume) return false;
         if (type && m.type !== type) return false;
-        if (edition && m.edition !== edition) return false;
+        if (version && m.version !== version) return false;
         if (keyword && !m.name.toLowerCase().includes(keyword) && 
             !m.type.toLowerCase().includes(keyword) && 
             !m.grade.toLowerCase().includes(keyword) &&
@@ -614,7 +634,7 @@ function renderMaterials(filter = "") {
         if (grade) conditions.push(grade);
         if (volume) conditions.push(volume);
         if (type) conditions.push(type);
-        if (edition) conditions.push(edition);
+        if (version) conditions.push(version);
         if (keyword) conditions.push('关键词:"' + keyword + '"');
         resultEl.textContent = conditions.length > 0 
             ? '筛选条件：' + conditions.join(' · ') + '，共找到 ' + filtered.length + ' 份资料'
@@ -675,7 +695,7 @@ function resetFilters() {
     document.getElementById("filterGrade").value = "";
     document.getElementById("filterVolume").value = "";
     document.getElementById("filterType").value = "";
-    document.getElementById("filterEdition").value = "";
+    document.getElementById("filterVersion").value = "";
     document.getElementById("materialSearch").value = "";
     filterMaterials();
 }
