@@ -1,109 +1,76 @@
-/* ===== Nebula EduHub 交互脚本 ===== */
-
-// 移动端菜单切换
 function toggleMenu() {
-    const links = document.getElementById('navLinks');
-    if (links) {
-        links.classList.toggle('mobile-open');
-    }
+    let links = document.getElementById('navLinks');
+    if (links) links.classList.toggle('mobile-open');
 }
 
-// 首页资料分类筛选
 function filterResources(btn, cat) {
     document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
     if (btn) btn.classList.add('active');
     document.querySelectorAll('.resource-card').forEach(card => {
-        const cats = card.getAttribute('data-cat') || '';
-        if (cat === 'all' || cats.includes(cat)) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
+        let cats = card.getAttribute('data-cat') || '';
+        card.style.display = (cat === 'all' || cats.includes(cat)) ? 'flex' : 'none';
     });
 }
 
-// 搜索页 - 关键词搜索
 function doSearch() {
-    const kw = document.getElementById('searchInput');
+    let kw = document.getElementById('searchInput');
     if (!kw) return;
-    const keyword = kw.value.trim().toLowerCase();
-    const rows = document.querySelectorAll('.resource-row');
-    let count = 0;
+    let keyword = kw.value.trim().toLowerCase();
+    let rows = document.querySelectorAll('.resource-row');
     rows.forEach(row => {
-        const name = (row.getAttribute('data-name') || '').toLowerCase();
-        const grade = (row.getAttribute('data-grade') || '').toLowerCase();
-        const subject = (row.getAttribute('data-subject') || '').toLowerCase();
-        const type = (row.getAttribute('data-type') || '').toLowerCase();
-        const note = (row.querySelector('.note')?.textContent || '').toLowerCase();
-        if (!keyword || name.includes(keyword) || grade.includes(keyword) || subject.includes(keyword) || type.includes(keyword) || note.includes(keyword)) {
-            row.style.display = 'flex';
-            count++;
-        } else {
-            row.style.display = 'none';
-        }
+        let name = (row.getAttribute('data-name') || '').toLowerCase();
+        let grade = (row.getAttribute('data-grade') || '').toLowerCase();
+        let subject = (row.getAttribute('data-subject') || '').toLowerCase();
+        let type = (row.getAttribute('data-type') || '').toLowerCase();
+        let note = (row.querySelector('.note')?.textContent || '').toLowerCase();
+        row.style.display = (!keyword || name.includes(keyword) || grade.includes(keyword) || subject.includes(keyword) || type.includes(keyword) || note.includes(keyword)) ? 'flex' : 'none';
     });
 }
 
-// 搜索页 - 下拉筛选
 function applyFilter() {
-    const grade = document.getElementById('filterGrade')?.value || '';
-    const subject = document.getElementById('filterSubject')?.value || '';
-    const type = document.getElementById('filterType')?.value || '';
-    const keyword = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
-
+    let grade = document.getElementById('filterGrade')?.value || '';
+    let subject = document.getElementById('filterSubject')?.value || '';
+    let type = document.getElementById('filterType')?.value || '';
+    let keyword = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
     document.querySelectorAll('.resource-row').forEach(row => {
-        const rowGrade = row.getAttribute('data-grade') || '';
-        const rowSubject = row.getAttribute('data-subject') || '';
-        const rowType = row.getAttribute('data-type') || '';
-        const rowName = (row.getAttribute('data-name') || '').toLowerCase();
-        const rowNote = (row.querySelector('.note')?.textContent || '').toLowerCase();
-
-        const matchGrade = !grade || rowGrade === grade || rowGrade.includes(grade) || grade.includes(rowGrade);
-        const matchSubject = !subject || rowSubject === subject;
-        const matchType = !type || rowType === type;
-        const matchKeyword = !keyword || rowName.includes(keyword) || rowNote.includes(keyword) || rowSubject.toLowerCase().includes(keyword) || rowGrade.toLowerCase().includes(keyword);
-
-        if (matchGrade && matchSubject && matchType && matchKeyword) {
-            row.style.display = 'flex';
-        } else {
-            row.style.display = 'none';
-        }
+        let rg = row.getAttribute('data-grade') || '';
+        let rs = row.getAttribute('data-subject') || '';
+        let rt = row.getAttribute('data-type') || '';
+        let rn = (row.getAttribute('data-name') || '').toLowerCase();
+        let rnote = (row.querySelector('.note')?.textContent || '').toLowerCase();
+        let ok = (!grade || rg === grade || rg.includes(grade) || grade.includes(rg))
+            && (!subject || rs === subject)
+            && (!type || rt === type)
+            && (!keyword || rn.includes(keyword) || rnote.includes(keyword) || rs.toLowerCase().includes(keyword) || rg.toLowerCase().includes(keyword));
+        row.style.display = ok ? 'flex' : 'none';
     });
 }
 
-// 重置筛选
 function resetFilter() {
-    const grade = document.getElementById('filterGrade');
-    const subject = document.getElementById('filterSubject');
-    const type = document.getElementById('filterType');
-    const search = document.getElementById('searchInput');
-    if (grade) grade.value = '';
-    if (subject) subject.value = '';
-    if (type) type.value = '';
-    if (search) search.value = '';
+    ['filterGrade', 'filterSubject', 'filterType', 'searchInput'].forEach(id => {
+        let el = document.getElementById(id);
+        if (el) el.value = '';
+    });
     document.querySelectorAll('.resource-row').forEach(row => row.style.display = 'flex');
 }
 
-// 通用复制函数
 function copyText(text, btn) {
-    const oldText = btn.textContent;
-    const oldBg = btn.style.background;
-    const oldColor = btn.style.color;
-    const oldBorder = btn.style.borderColor;
-
-    const done = () => {
+    let old = btn.textContent;
+    let oldBg = btn.style.background;
+    let oldColor = btn.style.color;
+    let oldBorder = btn.style.borderColor;
+    let done = () => {
         btn.textContent = '已复制 ✓';
         btn.style.background = '#dcfce7';
         btn.style.color = '#16a34a';
         btn.style.borderColor = '#86efac';
         setTimeout(() => {
-            btn.textContent = oldText;
+            btn.textContent = old;
             btn.style.background = oldBg;
             btn.style.color = oldColor;
             btn.style.borderColor = oldBorder;
         }, 2000);
     };
-
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
     } else {
@@ -112,7 +79,7 @@ function copyText(text, btn) {
 }
 
 function fallbackCopy(text, callback) {
-    const ta = document.createElement('textarea');
+    let ta = document.createElement('textarea');
     ta.value = text;
     ta.style.position = 'fixed';
     ta.style.opacity = '0';
@@ -123,46 +90,26 @@ function fallbackCopy(text, callback) {
     if (callback) callback();
 }
 
-// 复制微信号
-function copyWechat() {
-    const btn = event.target;
-    copyText('17795600558', btn);
-}
+function copyWechat() { copyText('17795600558', event.target); }
+function copyQQ() { copyText('3616927242', event.target); }
+function copyXhs() { copyText('Nebula_official', event.target); }
 
-// 复制QQ号
-function copyQQ() {
-    const btn = event.target;
-    copyText('3616927242', btn);
-}
-
-// 复制小红书号
-function copyXhs() {
-    const btn = event.target;
-    copyText('Nebula_official', btn);
-}
-
-// 页面加载完成后
 document.addEventListener('DOMContentLoaded', function() {
-    // 如果URL带了搜索关键词，自动填入并搜索
-    const params = new URLSearchParams(window.location.search);
-    const kw = params.get('kw');
+    let params = new URLSearchParams(window.location.search);
+    let kw = params.get('kw');
     if (kw && document.getElementById('searchInput')) {
         document.getElementById('searchInput').value = kw;
         doSearch();
     }
-
-    // 点击导航链接后关闭移动端菜单
     document.querySelectorAll('.nav-links a').forEach(a => {
         a.addEventListener('click', () => {
-            const links = document.getElementById('navLinks');
+            let links = document.getElementById('navLinks');
             if (links) links.classList.remove('mobile-open');
         });
     });
-
-    // 平滑滚动（锚点链接）
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
+            let target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
