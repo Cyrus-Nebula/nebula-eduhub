@@ -1172,6 +1172,7 @@ footer {
 .footer-list li {
     margin-bottom: 10px;
     font-size: 13px;
+    position: relative;
 }
 .footer-list a {
     color: #9ca3af;
@@ -1206,7 +1207,9 @@ footer {
 /* 页脚联系图标 */
 .footer-icon {
     color: var(--accent);
-    margin-right: 6px;
-    width: 14px;
+    position: absolute;
+    left: -22px;
+    top: 2px;
+    width: 16px;
     text-align: center;
 }
