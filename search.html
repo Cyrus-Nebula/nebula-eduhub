@@ -241,13 +241,17 @@
             <div id="latestContainer"></div>
         </div>
 
-        <div id="materialsContainer"></div>
-
         <!-- 小红书精选笔记 -->
         <div class="category-section" id="xhsSection">
             <div class="category-title">📕 小红书精选笔记<span class="count" id="xhsCount">17份</span></div>
             <div class="material-grid" id="xhsContainer"></div>
         </div>
+
+        <!-- 全部资料展开按钮 -->
+        <div style="text-align:center;margin:30px 0;">
+            <button id="toggleAllBtn" onclick="toggleAllMaterials()" style="padding:12px 32px;border:none;border-radius:8px;background:#2563eb;color:white;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;">显示所有资料</button>
+        </div>
+        <div id="materialsContainer"></div>
 
         <div class="empty-note">
             <h4>📌 大文件需联系微信获取</h4>
@@ -619,9 +623,9 @@ function renderMaterials(filter = "") {
     const type = document.getElementById("filterType").value;
     const version = document.getElementById("filterVersion").value;
     
-    // 无任何筛选条件时不展示全部资料列表
+    // 无任何筛选条件且未展开全部时不展示资料列表
     const hasFilter = keyword || subject || grade || volume || type || version;
-    if (!hasFilter) {
+    if (!hasFilter && !showAllMaterials) {
         container.innerHTML = '';
         const resultEl = document.getElementById("filterResult");
         if (resultEl) {
@@ -707,11 +711,12 @@ function renderMaterials(filter = "") {
     container.innerHTML = html;
 }
 
-// 渲染最新资料（随机抽取8个）
+// 渲染最新资料（从最新上传的20个里随机抽8个）
 function renderLatestMaterials() {
     const container = document.getElementById("latestContainer");
     if (!container) return;
-    const shuffled = [...materials].sort(() => Math.random() - 0.5);
+    const latestPool = materials.slice(-20);
+    const shuffled = latestPool.sort(() => Math.random() - 0.5);
     const latest = shuffled.slice(0, 8);
     let html = '<div class="material-grid">';
     latest.forEach(m => {
@@ -749,6 +754,24 @@ function renderLatestMaterials() {
     });
     html += '</div>';
     container.innerHTML = html;
+}
+
+// 展开/收起全部资料
+let showAllMaterials = false;
+function toggleAllMaterials() {
+    showAllMaterials = !showAllMaterials;
+    const btn = document.getElementById("toggleAllBtn");
+    if (showAllMaterials) {
+        btn.textContent = "收起所有资料";
+        btn.style.background = "#6b7280";
+    } else {
+        btn.textContent = "显示所有资料";
+        btn.style.background = "#2563eb";
+    }
+    renderMaterials();
+    if (showAllMaterials) {
+        document.getElementById("materialsContainer").scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // 重置筛选器
